@@ -1,0 +1,78 @@
+\chapter{New Commands}
+\label{cha:new-commands}
+
+\LaTeX{} also gives you the ability to define your own commands.  This
+ability is seldom necessary as a great variety of packages are
+distributed with the major \LaTeX{} distributions and many others are
+available on the Internet from \LaTeX{}-using organizations and
+individuals.  Chances are that most things you want to do are
+converged either in \LaTeX{} or an available package.
+
+Should you find yourself in a situation where you need something that
+is not available in \LaTeX{} or a package, or you have a bunch of
+commands that are used repeatedly, you can define a new command in the
+preamble of your document.
+
+\section{Defining New Commands}
+\label{sec:defin-new-comm}
+
+The \verb|\newcommand| command allows you to define a command with a
+name that is not already in use by \LaTeX{} or any of the packages you
+are using with your document.  Usage is as follows:
+\begin{verbatim}
+\newcommand{name}{definition}
+\end{verbatim}
+
+Additionally, you can also add a third argument as follows to specify
+the number of arguments for your new command:
+\begin{verbatim}
+\newcommand{name}[number of arguments]{definition}
+\end{verbatim}
+
+The \texttt{name} argument is the name you want for your command.  For
+example, \verb|\card| might be the name you want.  The definition
+argument is a set of commands that describes what the command should
+do.  For example, if you want \verb|\card| to double overline its
+argument, you would use \verb|\overline{\overline{}}|.  Thus, you
+would add
+\begin{verbatim}
+\newcommand{\card}{\overline{\overline}}
+\end{verbatim}
+to the preamble of your document.  Alternatively, you could use
+\begin{verbatim}
+\newcommand{\card}[1]{\overline{\overline{#1}}}.
+\end{verbatim}
+This formation is essential if you want to define a command that has
+more than one argument.
+
+For example, if you have the following document:
+\begin{verbatim}
+\documentclass{article}
+\newcommand{\card}[1]{\overline{\overline{#1}}}
+
+\begin{document}
+
+\[
+\card{A}=\aleph_0
+\]
+
+\end{document}
+\end{verbatim}
+you would get an output that looks like
+\[
+\card{A}=\aleph_0
+\]
+
+\section{Redefining Commands}
+\label{sec:redefining-commands}
+
+If a command already exists, you cannot use it as a name for a new
+command.  However, if you want to redefine how a command acts, you can
+do this with the \verb|\renewcommand| command.  Other than modifying
+existing commands, rather than defining new commands,
+\verb|\renewcommand| behaves exactly like \verb|\newcommand|.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "reader"
+%%% End: 

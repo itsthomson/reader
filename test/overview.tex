@@ -1,0 +1,235 @@
+\chapter{An Overview of \LaTeX{}}
+\label{cha:an-overview-latex}
+
+\section{What It Does}
+\label{sec:what-it-does}
+
+\LaTeX{} dominates academic publishing in science and mathematics.  If
+you want an academic career in these fields (particularly
+mathematics), you must learn to love \LaTeX{}.  Those that merely want
+to type up their homework can get by with a casual fondness.
+
+While not as friendly as the cartoon paperclip, \LaTeX{} is not at all
+difficult to use.  In fact, the great news is that \LaTeX{} possesses
+a very flat learning curve.  This means that once you get into it,
+getting at all the most advanced features is not that difficult.  A
+little practice is all that is needed to produce textbook-quality
+technical documents.  Unfortunately, for all of its virtues, \LaTeX{}
+is not all that friendly to the beginner.  In fact, that small bit of
+practice necessary for getting textbook-quality is not that far from
+what is needed to do some basic typesetting in \LaTeX{}.
+
+It will run on any modern computer system (and most unmodern computer
+systems) and is well supported by a community of developers,
+enthusiasts, and fanatical zealots.  It can be extended to satisfy a
+wide variety of publishing needs, and a vast repository of such
+user-made packages are available on the Internet.  Most significantly
+for academia: \LaTeX{} is free.  Departments are too cheap to buy
+licenses for big commercial software products, and students are too
+lazy to learn how to use a pirated copy of Mathematica.  Before long,
+you may decide to junk Microsoft Word and the stupid paperclip and do
+all of your word processing with \LaTeX{}.
+
+\section{Where It Came From}
+\label{sec:where-it-came}
+
+The \TeX{} language was written by Stanford computer scientist Donald
+Knuth in the late 1970s.  Knuth is best known for \emph{The Art of
+  Computer Programming} books which are of biblical proportions in
+academic computer science.  Upset by the poor quality of the
+typesetting in the published editions of his books, Knuth decided that
+he could do better.  The first version of \TeX{} was completed in 1978
+and ran on a huge mainframe computer at Stanford.  Although \TeX{}
+began as a research project, the mathematics community became
+interested because it promised to be a cheap solution for academic
+publishing.  The American Mathematical Society even sponsored their
+own \TeX{} implementation, predictably titled \AmS-\TeX{}.
+
+In addition to \TeX{}, Knuth also wrote \MF{}, a language for
+producing document fonts from mathematical curves.  This system, and
+its successor \MP{}, are still used for generating fonts and figures
+for technical documents.
+
+The \TeX{} language itself is rather primitive.  You could typeset an
+entire document in pure \TeX{} if you wanted to, but you could also
+drive on the wrong side of the road.  Donald Knuth wrote what is
+called Plain \TeX{}, a set of higher-level commands written in simpler
+\TeX{} commands, to make things easier for mere mortals.  However,
+even in Plain \TeX{}, the author has to do more work setting the type
+than actually composing the document.  Various languages derived from
+\TeX{} have been developed to be more functional than Plain \TeX{}.
+Of these, \LaTeX{} is the most prevalent.  It was written in 1984 by
+research computer scientist Leslie Lamport.  Thus, \LaTeX{} is not a
+software package like Microsoft Office or even a stand-alone computer
+language.  Rather, it is what is called a macro language\Dash{}a set of
+commands written in \TeX{}.  In practice, it functions like a typical
+markup language such as HTML\@.  Development on \LaTeX{} still
+continues: the current version is called \LaTeXe{} and small updates
+are made to the system about every six months.  The community is
+working towards the next major release, aptly, \LaTeX{3}.
+
+\section{The Strange Name}
+\label{sec:strange-name}
+
+The funny typesetting of the word \TeX{} is supposed to be a rendition
+of the Greek letters $\tau \epsilon \chi$, which are transliterated as
+\emph{tex}.  It should be pronounced ``tekh'' where ``kh'' indicates a
+voiceless velar fricative (as a German would say ``J.S.\ Bach'').
+However, most lazy Americans simply say ``tek.''  The name is in honor
+of Caltech, where Donald Knuth did his graduate work.  A popular folk
+etymology is that the name came from Knuth's verbal reaction to the
+lousy typesetting of the second volume of \emph{The Art of Computer
+  Programming}: ``blech.''
+
+\LaTeX{} is for Lamport \TeX{}, after the initial author Leslie
+Lamport.  It is usually pronounced ``lay-tek(h),'' although some say
+``lah-tek(h).''  To say ``le-tek(h)'' is incorrect and should be
+strictly shunned.  Apparently, the crazy typesetting Knuth used for
+the word \TeX{} was contagiouis and was embraced by Lamport as the
+word is printed as \LaTeX{}.
+
+\section{The \LaTeX{} System}
+\label{sec:latex-system}
+
+As was painfully explained earlier, \LaTeX{} itself is a document
+language.  More specifically, it is a macro language for the \TeX{}
+language.  Just like all computer languages, it must either be
+compiled or interpreted in order to be of any use.  The actual
+document preparation takes place in a text editor, such as Emacs or
+vi.  Vi is included in any POSIX-compliant operating system, such as
+UNIX and most Unix-like operating systems.  Emacs is commonly found on
+UNIX and Unix-like operating systems, and more recently, these editors
+can be found on Mac OS X as well (which is really just bad UNIX).  You
+can use DOS EDIT or Windows Notepad if you like wasting time.  A
+usable document usually carries a \texext{} extension is an ordinary
+ASCII text file.
+
+In general terms, a compiler is a software program that translates a
+human-readable source file into machine code that can be executed by a
+computer.  Similarly, the \LaTeX{} compiler translates a \texext{}
+file (the source) into a machine-readable format.  The output of the
+standard \LaTeX{} compiler is what is called DVI for math for ``device
+independent.''  A \dviext{} file will appear identical on any kind of
+printer or computer display.  However, viewing a \dviext{} file on
+anything other than a UNIX or Unix-like operating system proves to be
+a chore as DVI viewers are less common on Mac OS and Microsoft
+Windows.  Compilers have also been written to output a \texext{}
+document directly into PostScript, PDF, or even HTML\@.  It is also
+possible to convert from DVI to these formats.  PostScript is a
+language common to most larger laserjet printers, and allows you to
+print the document.  Additionally, PostScript was a common way to
+exchange documents over the Internet prior to the advent of PDF files.
+Adobe's Portable Document Format (PDF) is in some ways the successor
+to PostScript files for exchange over the Internet.  They are readable
+on nearly any piece of computer hardware that has a sufficiently-sized
+screen, and enough memory to store the file.  It is important to note
+that it is typically difficult to impossible to recover a \texext{}
+document from a compiled document.  Thus, it is important to keep the
+source files around if further editing is anticipated.
+
+\LaTeX{} itself is fairly comprehensive and can accommodate a wide
+variety of publishing needs.  It can, however, be extended with the
+addition of user-defined macro packages.  A package is an independent
+source file that adds features to the language by defining them in
+terms of existing \LaTeX{} commands (these are called macros).  This
+is the same principle by which \LaTeX{} is derived from Plain \TeX{};
+\LaTeX{} is actually one big \TeX{} macro package.  An author can
+include a package in a document and make use of these new features.
+Packages can greatly simplify document creation by providing
+additional commands that would take time and/or extensive programming
+knowledge to implement.  The American Mathematical Society provides
+macro packages that extend on the already rich mathematical
+typesetting ability of \LaTeX{}.  This is collectively known as the
+\AmS-\LaTeX{} system, and it can be considered to be the
+mathematician's god package.  Also available are packages that add
+support for new classes of documents, graphics, illustrations,
+publishing in different languages, and even printing chess boards and
+crossword puzzles.
+
+\BibTeX{} is another important extension to \TeX{} and \LaTeX{}.
+\BibTeX{} automates the creation of bibliographies and textual
+citations.  A separate source file is used to store the publication
+data for books, journals, and other articles that can be referred to
+by a \TeX{} document.  An author can create a list of commonly used
+citations and quickly refer to them in any document.  When compiled,
+\BibTeX{} automates the formatting of citations and generates the
+bibliography, all according to a customizable style package.  A large
+number of \BibTeX{} packages are available to handle different
+academic, legal, and professional citation styles.
+
+Fonts for use with \LaTeX{} are usually written in \MF{} or \MP{} and
+then compiled.  Since fonts are defined by geometric curves (the
+curious can Google ``B\'ezier curve''), they can be extremely
+versatile.  The same font can be used on any computer system for which
+a \MF{} or \MP{} compiler is available.  Often, technical
+illustrations are written in \MP{}.  Upon execution, the \LaTeX{}
+compiler will reference the fonts that it needs and render them
+appropriately.
+
+The advantage of this approach is that \LaTeX{} is not married to any
+specific operating platform.  A \texext{} document can be written on
+any computer system with a text editor.  It is only necessary to
+provide the compiler for a given operating system.  With a bit of
+work, \LaTeX{} will run on anything that you can connect to a monitor,
+keyboard, and printer to, or even those systems that you cannot
+connect a printer to.  Furthermore, regardless of platform, \LaTeX{}
+will produce identical output.
+
+However, compiling and configuring a complete \LaTeX{} system is a
+demanding and sometimes painful undertaking.  To remedy this, some
+people have been kind enough to pre-package all of the necessary
+software and automate the process.  These complete, ready-to-use
+\LaTeX{} systems are called distributions.  \MiKTeX{} is the most
+popular for Windows.  pro\TeX{t} is derived from \MiKTeX{} and can
+ostensibly be run directly from a CD or flash drive.  te\TeX{} is a
+common distribution on UNIX and Mac OS X, and \TeX{} Live is a
+cross-platform collection of distributions.
+
+While there are die hards who would rather face certain death than
+stop using Emacs, and another group of die hards who await the day
+when Emacs users will see the light and use vi, some people feel that
+a text editor is not the most productive environment for producing
+\LaTeX{} documents.  Furthermore, many people are not familiar with
+Emacs or vi, and have no need to learn the intricacies of either
+editor.  To this end, software developers have produced a number of
+alternatives.  LyX and \TeX{macs} attempt to reproduce the
+friendliness of Word or WordPerfect.  These programs are
+pseudo-WYSIWYG (``what you see is what you get'') interfaces to an
+underlying \LaTeX{} system.  However, this approach also obscures the
+high degree of control the cryptic-looking source code provides.  The
+\LaTeX{} front-end is another approach; a frontend is simply a text
+editor with some creature comforts like syntax highlighting to help
+you navigate your source code, toolbars for common commands, help with
+matching parentheses, and project management.  These usually integrate
+with an existing \LaTeX{} distribution and link to the \LaTeX{}
+compiler; this allows you to compile your document without ever
+leaving the front-end.  WinEdt and \TeX{nicCenter} are popular
+front-ends for Windows, \TeX{Shop} is popular for Mac, and there are
+many implementations for UNIX systems.  For those that still can't get
+enough of their UNIX terminal, AUC\TeX{} adds additional \TeX{}
+functionality to Emacs and \LaTeX{}-suite will extend the vim
+implementation of vi with \LaTeX{}-friendly features.
+
+\section{Documentation and the \TeX{} Community}
+\label{sec:docum-tex-comm}
+
+Because there are so many different components that make up a \LaTeX{}
+system, documentation is unfortunately very scattered.  The
+information that you need may not be part of \LaTeX{} itself, but a
+specific package or perhaps your distribution.  The various
+distributions are usually very good at providing the documentation to
+the packages that they support.  However, there are so many packages
+available that a problem might only be solved by an appeal to the
+larger \TeX{} community.  The \href{http://www.ctan.org}{Comprehensive
+  \TeX{} Archive Network (CTAN)} and the
+\href{http://www.tug.org}{\TeX{} Users Group} are the two largest
+Internet communities that provide repositories of \TeX{} packages and
+documentation.  The benefit of the collaborative nature of \LaTeX{} is
+its extreme versatility, but there is a price to be paid.  There is no
+stupid cartoon paperclip to answer your questions.  Fortunately, the
+answers are available to those willing to make a little effort.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "reader"
+%%% End: 

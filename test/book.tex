@@ -1,0 +1,82 @@
+\documentclass[oneside]{memoir}
+\usepackage{slantsc}
+\setcounter{secnumdepth}{0}
+\pagestyle{empty}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{garamond}
+\usepackage{readerpackage}
+
+%\settrimmedsize{23cm}{13.3cm}{*}
+%%\settypeblocksize{42\onelineskip}{21pc}{*}
+%\settypeblocksize{42\onelineskip}{35pc}{*}
+%\setlength{\trimtop}{0pt}
+%\setlength{\trimedge}{\stockwidth}
+%\addtolength{\trimedge}{-\paperwidth}
+%\setlrmargins{*}{3.1cm}{*}
+%%\setlrmargins{*}{1cm}{*}
+%\setulmargins{4.5\onelineskip}{*}{*}
+%\setheadfoot{\onelineskip}{3\onelineskip}
+%\setheaderspaces{\onelineskip}{*}{*}
+%\setmarginnotes{17pt}{51pt}{\onelineskip}
+%\checkandfixthelayout[lines]
+
+%% Bringhurst chapter style
+\makechapterstyle{bringhurst}{%
+\renewcommand{\chapterheadstart}{}
+\renewcommand{\printchaptername}{}
+\renewcommand{\chapternamenum}{}
+\renewcommand{\printchapternum}{}
+\renewcommand{\afterchapternum}{}
+\renewcommand{\printchaptertitle}[1]{%
+\raggedright\Large\scshape\MakeLowercase{##1}}
+\renewcommand{\afterchaptertitle}{%
+\vskip\onelineskip \hrule\vskip2\onelineskip}
+}
+
+
+%% Bringhurst page style
+\makepagestyle{bringhurst}
+\makeevenfoot{bringhurst}{\thepage}{\thepage}{\thepage}
+\makeoddfoot{bringhurst}{\thepage}{\thepage}{\thepage}
+
+\begin{document}
+\chapterstyle{bringhurst}
+\garamond
+\title{\LaTeX{} for Math and Science\\ \small{$2^{{\textrm nd}}$ edition}} 
+\author{Cordelia Csar \and
+  Elizabeth Dyer \and Fernand Garin \and Alan Leong \and Thomson
+  Nguyen \and Dan Volmar} 
+\date{\today}
+\normalfont
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\listoftables
+\newpage
+\mainmatter
+\include{overview}
+\include{typeset}
+\include{mathmode}
+\include{moremathmode}
+\include{mathexamples}
+\include{tables}
+\include{doc_classes}
+\include{packages}
+\include{newcommands}
+\include{bibliography}
+
+\appendix
+\appendixpage
+
+\include{software}
+\include{mathcommands}
+\include{listpackages}
+\include{commonerrors}
+
+\backmatter
+
+
+
+\end{document}

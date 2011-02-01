@@ -1,0 +1,118 @@
+\chapter{Software}
+\label{cha:software}
+
+Nearly all the software you need is freely distributed, with some
+frontends being the notable exception.  As a consequence, \LaTeX{}
+runs quite well on just about any modern platform.
+
+The software necessary for using \LaTeX{} mostly falls into three
+categories: \LaTeX{} distributions, editors, and frontends.  \LaTeX{}
+distributions include the \LaTeX{} compiler, and generally come with a
+DVI viewer, and some other useful programs for working with \LaTeX{}
+documents.
+
+Editors allow you to manipulate plain text files, such as \LaTeX{}
+source files.  A basic editor is included with most modern operating
+systems.  For the Mac, SimpleText was the included basic editor for a
+very long time, and more recent versions of the Mac OS (Mac OS X)
+include a more sophisticated editor, TextEdit.  Windows offers
+Notepad, which is a bit limited, as well as WordPad in all current
+versions.  Lastly, Unix operating systems typically have many
+editors.  These include vi, its cousin vim, Emacs, Pico, and Pico's
+GNU counterpart Nano.
+
+Even the best editor is still focused on the task of editing text
+files.  While a text editor is the most basic requirement to use
+\LaTeX{}, there is another class of programs called frontends, which
+seek to simplify the task of creating \LaTeX{} documents.  Frontends
+typically include editor capabilities that are specifically geared
+towards \LaTeX{}.  This means that source code is often coded for
+clarity, the pairing of delimiters is sometimes tracked, and some have
+auto-complete functions based on what is currently being typed.  The
+most important feature in most frontends, however, is some degree of
+integration with a compiler.  This allows you to edit, compile, and
+view your document all from within a single program.  Some frontends
+even go so far as to let you view the compiled code in real-time, or
+near real-time, and edit the underlying source code graphically from
+the compiled version.
+
+\section{Installing a \LaTeX{} Distribution}
+\label{sec:inst-latex-distr}
+
+The first and most important thing to have before creating \LaTeX{}
+documents is a \LaTeX{} distribution.  This section will describe some
+of the most common \LaTeX{} distributions for different operating
+systems.
+
+\subsection{Windows 95/98/98SE/ME/2000/XP/Vista}
+\label{sec:wind-959898s}
+
+\href{http://www.miktex.org}{\MiKTeX{}} is a very popular \LaTeX{}
+distribution for Windows.  Before installing, though, you have decide
+whether to go for a barebones \MiKTeX{} installation and then download
+the packages as you need them or a complete installation of \MiKTeX{}
+with all packages and other optional files installed.  Regardless of
+the type of installation you want, to install it, download the
+appropriate installer.  Once the download is finished, run the
+installer.  It will then connect to the Internet and download the
+files needed to install \MiKTeX{}.  After the installer finishes
+downloading everything, close the installer and run it again.  This
+time, let it install the distribution from a local directory (the
+temporary directory the installer saved all the files to).  After a
+few minutes, \MiKTeX{} should be installed.
+
+\subsection{Mac OS X and Unix}
+\label{sec:mac-os-x}
+
+\TeX{} Live is the recommended \LaTeX{} distribution for Mac OS X and
+Unix.  You can go to their web site at
+\url{http://www.tug.org/texlive/} for more information and to download
+the installer.
+
+\section{Frontends}
+\label{sec:frontends}
+
+At this point, you have a working \LaTeX{} installation.  While you
+could use a regular text editor to make your \LaTeX{} files (discussed
+in the next section), using a dedicated \LaTeX{} frontend is
+recommended.  Here are a couple of \LaTeX{} frontends for Windows and
+Macs.
+
+\subsection{Windows}
+\label{sec:windows}
+
+\TeX{}nicCenter is an open source and freely distributable frontend to
+\LaTeX{}.  It integrates the \LaTeX{} and \BibTeX{} compilers as well
+as a menu-driven interface to insert common \LaTeX{} commands.  You
+can download \TeX{}nicCenter at \url{http://www.toolscenter.org/}.
+
+\subsection{Mac OS X}
+\label{sec:mac-os-x-1}
+
+\TeX{}Shop is an open source and freely distributable frontend for
+\LaTeX{} on the Mac OS X.  Like \TeX{}nicCenter for Windows, it
+integrates the \LaTeX{} compilers together and offers a user-friendly
+interface for \LaTeX{} beginners.  You can download \TeX{}Shop at
+\url{http://www.uoregon.edu/~koch/texshop/}.
+
+\subsection{Multiplatform}
+\label{sec:multiplatform}
+
+AUC\TeX{} is a multiplatform \LaTeX{} frontend that interfaces with
+Emacs to provide a comprehensive editing environment for \TeX{}
+documents.  It has many features that are too numerous to mention in
+here, but you can find out more at
+\url{http://www.gnu.org/software/auctex/}.
+
+\section{Text Editors}
+\label{sec:text-editors}
+
+While using a frontend is recommended, there are times when a simple
+text editor is the best option (and in some cases, the only option).
+Some examples that have been mentioned previously are Emacs, vi (and
+its cousin vim), Pico, and Nano.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "reader"
+%%% End: 

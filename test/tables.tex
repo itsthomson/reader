@@ -1,0 +1,209 @@
+\chapter{Tables}
+\label{cha:tables}
+
+Matrices are really wonderful if you want to make, well, matrices.
+But what if you wanted to put words in your matrix?  Well, if you
+really wanted, you could probably use \texttt{mathrm} and make a giant
+ugly mess.  But in reality, your scary mutant matrix would be a
+table.  To avoid this untimely end to your sanity, the
+\texttt{tabular} environment exists.  Much like matrices, ampersands
+are used to separate entries in a row and double backslashes are used
+to end lines.  Additionally, one can control the justification of each
+of the individual columns and add vertical lines between the columns.
+In order to avoid continuing to describe tables in hazy terms, we are
+just going to cut to the chase and have an example.
+\begin{verbatim}
+\begin{tabular}{|c|c|}
+  a & b \\
+  c & d \\
+\end{tabular}
+\end{verbatim}
+makes the following table:
+\begin{center}
+\begin{tabular}{|c|c|}
+  a & b \\
+  c & d \\
+\end{tabular}
+\end{center}
+Now that was cool, but you've probably noticed that this example table
+has no horizontal lines, and as a result, is rather ugly.  That's
+where \verb|\hline| comes in.  \verb|\hline| draws a horizontal line.
+So if you want horizontal lines in the table above, you'd change
+things to:
+\begin{verbatim}
+\begin{tabular}{|c|c|}
+  \hline
+  a & b \\
+  \hline
+  c & d \\
+  \hline
+\end{tabular}
+\end{verbatim}
+to get:
+\begin{center}
+\begin{tabular}{|c|c|}
+  \hline
+  a & b \\
+  \hline
+  c & d \\
+  \hline
+\end{tabular}
+\end{center}
+Note that you need a line break before the last \verb|\hline| (if you
+didn't use \verb|\hline|, you wouldn't need a line break after the
+last set of entries).  So now that we have a pretty table, how did we
+get there?
+
+\section{Anatomy of the \texttt{tabular} Environment}
+\label{sec:anat-tabular-envir}
+
+To start, we see that things are laid out similarly to a matrix, with
+each cell in a row separated by an ampersand and rows being ended with
+line breaks.  Notice that we put some arguments after the
+\verb|\begin{tabular}|.  The vertical bars, |, draw the lines down
+each column.  The \texttt{c}'s center the contents of each cell.
+The other options are \texttt{l} and \texttt{r} for left and right
+justification, respectively.  But what if you don't want vertical
+lines?  You simply leave out the bars and continue as usual.  By
+default, entries are centered vertically within the cell, but, not
+surprisingly, you have the option of changing this to either the top,
+\texttt{t}, or bottom, \texttt{b}.  This option, should you desire it,
+goes in square brackets immediately following the
+\verb|\begin{tabular}|.  So, if we wanted a table with the entries at
+the bottom of the cells, we'd have:
+\begin{verbatim}
+\begin{tabular}[b]{|c|c|}
+  \hline
+  a & b \\
+  \hline
+  c & d \\
+  \hline
+\end{tabular}
+\end{verbatim}
+which produces:
+\begin{center}
+\begin{tabular}[b]{|c|c|}
+  \hline
+  a & b \\
+  \hline
+  c & d \\
+  \hline
+\end{tabular}
+\end{center}
+
+\subsection{Fiddling with Columns}
+\label{sec:fiddl-with-columns}
+
+\LaTeX{} automatically decides how wide to make each column, but, as
+with many things in \LaTeX{}, you can override it, should you need to
+do so.  Likewise, you can make a single cell span more than one
+column. To set the width of a column manually, you change the
+alignment.  Instead of \texttt{l}, \texttt{r}, or \texttt{c}, you use
+\verb|p{}| and put the width of the column inside the curly braces.
+\verb|\multicolumn| and \verb|\cline| are two other commands that
+override the layout of a table.  \verb|\multicolumn| lets you have a
+cell span that is more than one column.  It takes three arguments: the
+number of columns spanned, the alignment within the cell, and the
+actual contents.  \verb|\cline{a-b}| is a variation on \verb|\hline|
+which draws a horizontal line from column \texttt{a} to column
+\texttt{b}.  There are other far more complicated things that can be
+done with table alignment, but you'll have to look in a bigger, far
+more complicated, book for that.
+
+\section{The \texttt{table} Environment and Captions}
+\label{sec:table-envir-capt}
+
+It would look awfully silly if tables were split in two at page
+breaks.  As you might imagine, tables don't do that.  If a table falls
+on a page break, \LaTeX{} will move it entirely onto the next page.
+But what if you want to caption your table?  You'd want the caption to
+ride along with the table over the page breaks, wouldn't you?  Of
+course, you could always align the caption yourself, but why do extra
+work when you could use the \texttt{table} environment?
+\texttt{table} doesn't replace \texttt{tabular}; rather, it encloses
+\texttt{tabular}.  Within the \texttt{table} environment, you can use
+\verb|\caption| to caption your table (either above or below the
+\texttt{tabular} environment).  Additionally, the \verb|\begin{table}|
+command takes an optional argument that controls the placement of the
+table.  The options are \texttt{h} to place the table where it appears
+in the source, \texttt{t} to place the table at the top of a page,
+\texttt{b} to place the table at the bottom of a page, and \texttt{p}
+to place the page on its own page of floats.
+
+\section{Example}
+\label{sec:example}
+
+Up to this point, we've had fairly silly, uninteresting examples.
+This section is just going to be one big example.  To render the table
+exactly as typed, the \texttt{booktabs} and \texttt{graphicx} packages
+must be loaded.
+\begin{table}
+  \centering
+  \caption{Career statistics: Brant Brown}
+  \label{tab:brant-brown}
+  \resizebox{\textwidth}{!}{\begin{tabular}{@{}rrrrrrrrrrrrrrrrr@{}}
+    \toprule
+    Year & Tm & G & AB & R & H & 2B & 3B & HR & RBI & SB & CS & BB &
+    SO & BA & OBP & SLG \\
+    \midrule
+    1996 & CHC & 29 & 69 & 11 & 21 & 1 & 0 & 5 & 9 & 3 & 3 & 2 & 17 &
+    .304 & .329 & .536 \\
+    1997 & CHC & 46 & 137 & 15 & 32 & 7 & 1 & 5 & 15 & 2 & 1 & 7 & 28
+    & .234 & .286 & .409 \\
+    1998 & CHC & 124 & 347 & 56 & 101 & 17 & 7 & 14 & 48 & 4 & 5 & 30
+    & 95 & .291 & .348 & .501 \\
+    1999 & PIT & 130 & 341 & 49 & 79 & 20 & 3 & 16 & 58 & 3 & 4 & 22 &
+    114 & .232 & .238 & .449 \\
+    2000 & FLA & 41 & 73 & 4 & 14 & 6 & 0 & 2 & 6 & 1 & 0 & 3 & 33 &
+    .192 & .224 & .356 \\
+    \multicolumn{2}{r}{CHC} & 54 & 89 & 7 & 14 & 1 & 0 & 3 & 10 & 2 &
+    1 & 10 & 29 & .157 & .248 & .270 \\
+    \multicolumn{2}{r}{TOT} & 95 & 162 & 11 & 28 & 7 & 0 & 5 & 16 & 3
+    & 1 & 13 & 62 & .173 & .237 & .309 \\
+    \addlinespace
+    \multicolumn{2}{l}{5 Seasons} & 424 & 1056 & 142 & 261 & 52 & 11 &
+    45 & 146 & 15 & 14 & 74 & 316 & .247 & .301 & .445 \\
+    \bottomrule
+  \end{tabular}}
+\end{table}
+
+\begin{verbatim}
+\begin{table}
+  \centering
+  \caption{Career Statistics: Brant Brown}
+  \label{tab:brant-brown}
+  \resizebox{\textwidth}{!}{\begin{tabular}{@{}rrrr %
+        rrrrrrrrrrrrr@{}}
+    \toprule
+    Year & Tm & G & AB & R & H & 2B & 3B & HR & RBI &
+    SB & CS & BB & SO & BA & OBP & SLG \\
+    \midrule
+    1996 & CHC & 29 & 69 & 11 & 21 & 1 & 0 & 5 & 9 &
+    3 & 3 & 2 & 17 & .304 & .329 & .536 \\
+    1997 & CHC & 46 & 137 & 15 & 32 & 7 & 1 & 5 & 15
+    & 2 & 1 & 7 & 28 & .234 & .286 & .409 \\
+    1998 & CHC & 124 & 347 & 56 & 101 & 17 & 7 & 14 &
+    48 & 4 & 5 & 30 & 95 & .291 & .348 & .501 \\
+    1999 & PIT & 130 & 341 & 49 & 79 & 20 & 3 & 16 &
+    58 & 3 & 4 & 22 & 114 & .232 & .238 & .449 \\
+    2000 & FLA & 41 & 73 & 4 & 14 & 6 & 0 & 2 & 6 & 1
+    & 0 & 3 & 33 & .192 & .224 & .356 \\
+    \multicolumn{2}{r}{CHC} & 54 & 89 & 7 & 14 & 1 &
+    0 & 3 & 10 & 2 & 1 & 10 & 29 & .157 & .248 & .270
+    \\
+    \multicolumn{2}{r}{TOT} & 95 & 162 & 11 & 28 & 7
+    & 0 & 5 & 16 & 3 & 1 & 13 & 62 & .173 & .237 &
+    .309 \\
+    \addlinespace
+    \multicolumn{2}{l}{5 Seasons} & 424 & 1056 & 142
+    & 261 & 52 & 11 & 45 & 146 & 15 & 14 & 74 & 316 &
+    .247 & .301 & .445 \\
+    \bottomrule
+  \end{tabular}}
+\end{table}
+\end{verbatim}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "reader"
+%%% End: 

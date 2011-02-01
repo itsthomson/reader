@@ -1,0 +1,375 @@
+\chapter[Bibliographies]{Bibliographies for Fun and Profit}
+\label{cha:bibl-fun-prof}
+
+\section{Overview}
+\label{sec:overview}
+
+\LaTeX{} has some native features to automate the process of creating
+a bibliography and textual references.  These are affected with the use
+of the \texttt{thebibliography} environment.  This environment will
+allow you to define bibliographic references that can be cited in the
+main document.  This method is adequate for a document that makes use
+of a few sources, but it has some serious shortcomings that make it
+cumbersome for use in larger projects.  We will not discuss
+\texttt{thebibliography} in detail because it is outclassed by
+\BibTeX{}.
+
+Strictly speaking, \BibTeX{} is a separate program from \LaTeX{}, but
+it is included with nearly every \LaTeX{} distribution.
+
+To better understand the limitations of this system, consider the
+following example:
+\begin{verbatim}
+\begin{thebibliography}{99}
+\bibitem{Widder} Widder, David V.
+  \underline{Advanced Calculus}. 2nd ed.
+  Mineola, NY: Dover, 1989.
+\end{thebibliography}
+\end{verbatim}
+
+When placed at the end of a document, this code defines a source with
+the key \texttt{Widder}.  To cite this source in the body of the
+document, invoke the \texttt{cite} command.
+\begin{verbatim}
+For more hardcore multivariable calculus, consult
+\cite{Widder}.
+\end{verbatim}
+
+This will produce the following output:
+\begin{quotation}
+  For more hardcore multivariable calculus, consult [1].
+  
+  \ldots{}\textit{more stuff}\ldots{}
+  
+  [1] Widder, David V. \underline{Advanced Calculus}. 2nd ed. Mineola,
+  NY: Dover, 1989.
+\end{quotation}
+where the reference will print at the end of the document.
+
+\LaTeX{} makes things somewhat easier by handling the indexing.
+However, there is not much flexibility in the citation style.  You
+must type the citation in the desired style yourself.  In the above
+example, the source was type out in typical MLA style.  This can be
+frustrating and time consuming if you are not a master in the style
+with which you are preparing your document, or if you have to change
+the style at some later time.  This inflexibility can prevent you from
+using a style correctly.  According to the MLA, \textit{Advanced
+  Calculus} should be cited parenthetically as (Widder), rather than
+with the index [1].  There is also no easy way to reuse the same
+sources in other documents, other than using the traditional cut and
+paste.  \BibTeX{} was created to address all of these issues.
+
+\BibTeX{} is not a package; it is an auxiliary program with its own
+compiler.  It is not strictly for use with \LaTeX{}; it can be used
+with other flavors of \TeX{} as well.  Most \LaTeX{} distributions are
+preconfigured to use \BibTeX{}.
+
+The design philosophy of \BibTeX{} is to divorce the bibliographic
+information and style from the main document.  The bibliographic
+information is stored separately in a \texttt{.bib} (ASCII text)
+document and the style is defined by a style package.  An author can
+create a large list of commonly-referenced works to be use din many
+different documents without repeatedly entering the data.
+Furthermore, style packages can be used to automate and customize the
+creation and appearance of textual references and the bibliography.  A
+good \BibTeX{} installation will include a large number of academic,
+legal, and professional styles.  Many journals and publishers provide
+their own style packages.  Some individuals have even provided large
+\texttt{.bib} documents of works commonly cited in a specific academic
+field.  The use of \BibTeX{} may unnecessarily complicate small
+documents, but it is an invaluable tool for composing large documents
+or many documents that reference the same sources.
+
+\section{The Bibliographic Database}
+\label{sec:bibl-datab}
+
+As described above, \BibTeX{} expects the list of references to be
+stored in a separate ASCII text document.  To do this, use your text
+editor of choice to create a document with a \texttt{.bib} file
+extension.  This is where you will type your data.  This example will
+use \texttt{sources.bib}.  The format for an entry is relatively
+simple.  Figure~\ref{fig:sample-bibtex} provides a sample.
+
+\begin{figure}
+  \centering
+\begin{boxedverbatim}
+@book{Szekeres:2004,
+   author = "Peter Szekeres",
+   title = {A course in modern mathematical %
+     physics: groups, {H}ilbert space and %
+     differential geometry},
+   publisher = "Cambridge University Press",
+   address = Cambridge,
+   year = 2004,
+}
+\end{boxedverbatim}
+  \caption{A sample \BibTeX{} entry}
+  \label{fig:sample-bibtex}
+\end{figure}
+
+Notice that the entry begins with a declaration of the type of
+document being referenced (in this case, a book).  This is significant
+because books, papers, theses, etc., may be formatted differently,
+according to the style package.  Table~\ref{tab:entry-types} is a list
+of some of the more common entry types.  For specifics, consult the
+documentation of the style package you are using.
+
+\begin{table}
+  \centering
+  \caption{\BibTeX{} entry types}
+  \label{tab:entry-types}
+  \resizebox{\textwidth}{!}{\begin{tabular}{@{}ll@{}}
+    \toprule
+    Type & Description \\
+    \midrule
+    \texttt{@article} & An article published in a periodical. \\
+    \texttt{@book} & A book with a defined author and publisher. \\
+    \texttt{@conference} & An article printed in the proceedings of a
+    conference. \\
+    \texttt{@inproceedings} & Same as \texttt{@conference}. \\
+    \texttt{@manual} & A technical document or reference manual. \\
+    \texttt{@mastersthesis} & A thesis for a master's degree. \\
+    \texttt{@misc} & For works that are hard to categorize (i.e., web
+    sites). \\
+    \texttt{@phdthesis} & Like \texttt{@mastersthesis}, but for
+    doctoral theses. \\
+    \bottomrule
+  \end{tabular}}
+\end{table}
+
+The entire entry is enclosed in braces.  Following the declaration of
+the entry type, it is necessary to assign the entry a key name.  This
+is the name by which the source will be referenced in the main
+document.  In this case, the entry is named according to the author
+and the date of publication, \texttt{Szekeres:2004}.
+
+Commas are used to separate the data fields.  Neglecting a comma at
+the end of a field is the most common source of errors with \BibTeX{}.
+Each field is assigned a value with the = operator.  You must enclose
+strings with multiple words in quotation marks or braces, otherwise
+the \BibTeX{} compiler will ignore the whitespace and become confused.
+
+Table~\ref{tab:data-fields} is a partial list of the fields that
+\BibTeX{} understands.  Not all fields may be displayed by a
+bibliographic entry; this depends on the style being used.
+
+\begin{table}
+  \centering
+  \caption{\BibTeX{} data fields}
+  \label{tab:data-fields}
+  \resizebox{\textwidth}{!}{\begin{tabular}{@{}ll@{}}
+    \toprule
+    Field & Description \\
+    \midrule
+    \texttt{address} & The address (usually just the city and state)
+    of the publisher. \\
+    \texttt{author} & The author(s); special considerations to be
+    discussed shortly. \\
+    \texttt{booktitle} & The title of the book, when citing an article
+    printed in a book. \\
+    \texttt{edition} & The edition of the book; write it out in
+    full. \\
+    \texttt{editor} & The editor(s); refer to the discussion of the
+    author name. \\
+    \texttt{journal} & The name of the periodical in which an article
+    is published. \\
+    \texttt{month} & The month of publication for a periodical; can be
+    abbreviated. \\
+    \texttt{note} & For information that does not fit into any other
+    category. \\
+    \texttt{publisher} & The name of the publisher.  What else? \\
+    \texttt{title} & The title of the article or book. \\
+    \texttt{url} & The uniform resource locator of a document accessed
+    online. \\
+    \texttt{volume} & The volume number of a journal or multiple
+    volume book. \\
+    \texttt{year} & The year of publication. \\
+    \bottomrule
+  \end{tabular}}
+\end{table}
+
+Notice the use of capitalization in Figure~\ref{fig:sample-bibtex}.
+Some citation styles have different conventions for capitalization in
+the document title.  For example, MLA style capitalizes every word
+except prepositions, whereas only the first word of a title and proper
+nouns are capitalized according to the Chicago style.  It is best to
+let the style package handle the capitalization.  Surrounding a word
+or letter in braces will force capitalization, as in
+\texttt{\{H\}ilbert}.  This is best reserved for proper nouns.  \TeX{}
+commands for special characters can be used, such as \verb|\"u| for
+\"u, but should be enclosed in braces as well.
+
+Author names can either be entered as \textit{"Given name Surname"} or
+\textit{"Surname, Given name"} (i.e., \textit{"Grover Cleveland"} or
+\textit{"Cleveland, Grover"}).  \BibTeX{} will format the author's
+name appropriately.  If there is any ambiguity between the given name
+and the surname, use braces (for example, use \textit{"Zack \{de la
+  Rocha\}"} instead of \textit{"Zack de la Rocha"}).  Generally, the
+use of braces forces \BibTeX{} to treat the enclosed quantity as a
+single entity.
+
+To reference a work by multiple authors, simply insert \texttt{and}
+between each name.  The style package will handle the rest.  The list
+of authors may automatically be shortened and terminated with
+\textit{et al}, \textit{and others}, etc., if it becomes too long.
+
+In general, an entry follows the following syntax:
+\begin{verbatim}
+@doctype{<key>,
+    author = {...},
+    title = {...},
+    ...,
+}
+\end{verbatim}
+
+A number of entries constitutes a bibliography database (hencefore,
+``source file'').  If you notice a commonly recurring stirng in your
+sources, such as multiple references to the same journal, you can
+define a macro to use as an abbreviation.  For example, to abbreviate
+\texttt{The American Journal of Physics} as \texttt{AJP}, place the
+following declaration at the beginning of the source file:
+\begin{verbatim}
+@string{AJP = {The American Journal of Physics}}
+\end{verbatim}
+
+Then to reference the journal in a bibliographic entry, define the
+journal field with \texttt{journal = ajp}.  The abbreviation is not
+case-sensitive.  The general format for a string declaration is
+\begin{verbatim}
+@string{abbr_name = {...} }
+\end{verbatim}
+
+\section{Generating the Bibliography}
+\label{sec:gener-bibl}
+
+You must include a style package in order to produce a bibliography in
+your document.  There are plenty of styles available online and you
+will most likely find one that fits your needs.  The three most common
+styles in the humanities are those defined by the Modern Language
+Association (MLA style), the American Psychology Association (APA
+style), and the University of Chicago's Manual of Style (Chicago
+style).  Only high school teachers (and some literature professors)
+care about MLA style, but implementations of the others hsould be in
+any respectable \LaTeX{} distribution.
+
+To generate a bibliography with \BibTeX{}, you may need to include a
+macro package.  A style may require macros that are defined in a
+specific package.  The \texttt{natbib} package seems to work with most
+styles.  Some styles come bundled with their own macro package:
+\texttt{natbib} includes some styles, and so does \texttt{jurabib}.
+Some common styles are listed in Table~\ref{tab:style-packages}.  In
+the document body, define the style you want by passing it to the
+\verb|\bibliographystyle| command.  At the point in the body where you
+want the bibliography to appear (usually at the end), pass the name of
+your source file to the \verb|\bibliography| command.
+
+\begin{table}
+  \centering
+  \caption{Common \BibTeX{} style packages}
+  \label{tab:style-packages}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Style Package & Description \\
+    \midrule
+    \texttt{apa} & An implementation of APA style. \\
+    \texttt{apacite} & Another APA style package. \\
+    \texttt{apalike} & It's like APA, but not quite. \\
+    \texttt{chicago} & Do it Chicago style. \\
+    \texttt{chicagoa} & \ldots{}another Chicago style. \\
+    \texttt{harvard} & Harvard style?  Does anyone use this? \\
+    \texttt{jurabib} & A few useful styles, as well as footnote
+    support. \\
+    \texttt{natbib} & Several styles common in the natural
+    sciences. \\
+    \texttt{oxford} & Like Harvard style, but from Oxford. \\
+    \bottomrule
+  \end{tabular}  
+\end{table}
+
+As a side effect of \BibTeX{} actually being a separate program, you
+must run both programs on your source file.  First, use \LaTeX{} to
+compile the document and ignore all of the compiler warnings.  Then
+run the \BibTeX{} compiler.  In a properly configured \LaTeX{}
+environment, this is done by inputting
+\begin{verbatim}
+bibtex documentname.tex
+\end{verbatim}
+at the command line.  Some editors have support for \BibTeX{} in the
+interface.  Assuming that \BibTeX{} executes properly, you can
+recompile the document with \LaTeX{} and the citations and
+bibliography should appear.  If you notice errors, such as lots of
+question marks in your document, or if the \LaTeX{} compiler keeps
+complaining about missing references, run \LaTeX{} again.  It can take
+several compiles for all the references to stabilize.
+
+If you make changes to your source file, you will need to recompile
+with \BibTeX{} and again with \LaTeX{} to update all of the
+references.
+
+As an example, let us say there was a paper that used a variant of the
+Oxford style that required the \texttt{jurabib} package (it actually
+comes with the package).  The style itself is called \texttt{jox}.
+The name of the bibliography database was \texttt{sources.bib}.
+Included in the document preamble was
+\begin{verbatim}
+\usepackage{jurabib}
+\end{verbatim}
+and just before the end of the main body was
+\begin{verbatim}
+\bibliographystyle{jox}
+\bibliography{sources}
+\end{verbatim}
+Of course, the \texttt{jurabib} package needed to be installed
+correctly for this to work (see Chapter~\ref{cha:packages}).  Also,
+the file \texttt{sources.bib} was located in the same directory as the
+\LaTeX{} document.  If it were somewhere else, its exact location must
+be specified.  \BibTeX{} expects the source file to have a
+\texttt{.bib} extension; the complete filename would have been needed
+if the extension was something else.
+
+The \texttt{babelbib} package will let you specify a language for your
+bibliography.  Also, with a package like \texttt{bibunits} or
+\texttt{multibib}, you can include more than one bibliography in the
+same document, say, one for each chapter.  The moderately useful
+\texttt{splitbib} package will allow you to split up a bibliography
+and organize it by category.  Check out their documentation to find
+out how to do this.
+
+\section{Textual References}
+\label{sec:textual-references}
+
+\BibTeX{} will only include those references in the source file that
+are cited in your document.  If you had created the source file
+sampled above and invoked \BibTeX{} in some random document, nothing
+would have happened (or, nothing \emph{should} have happened).
+
+The citation method will depend somewhat on your choice of style.  It
+is generally accomplished by passing the key of the document you are
+referencing to the \verb|\cite| macro.  To cite our previous example:
+\begin{verbatim}
+The theory of general relativity postulates that
+spacetime is a four-dimensional Minkowskian
+manifold \cite{Szekeres:2004}.
+\end{verbatim}
+This will produce an inline citation, automatically formatted by the
+style.  Using the \texttt{chicago} style, this would print as
+(Szekeres, 2004).  Most styles will allow you to pass more information
+to \verb|\cite|, such as the page number, i.e.,
+\verb|\cite[536]{Szekeres:2004}| to cite page 536.  This input gives
+(Szekeres, 2004, 536) in \texttt{chicago}.
+
+You can force the inclusion of a document that you do not explicitly
+cite with \verb|\nocite{<key>}|.  This essentially creates an
+invisible citation.  For styles that do not default to parenthetical
+citations, you can usually use \verb|\citep{<key>}| to make one.  The
+\texttt{footbib} package introduces the \verb|\footcite{<key>}| macro
+that will place the full citation in the page footer, although it only
+works with some styles.  This is also possible with the
+\texttt{jurabib} package.  Finally, if you just want to list every
+single entry in your source file in the bibliography, use
+\verb|\nocite{*}|.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "reader"
+%%% End: 

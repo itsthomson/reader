@@ -1,0 +1,195 @@
+\chapter{Document Classes}
+\label{cha:document-classes}
+
+To this point, we have been talking pretty much about how to get
+\LaTeX{} to make text look the way you want, and we've always included
+the line \verb|\documentclass{article}|.  This is all well and good,
+and we get what we want, but you might be wondering: why only
+\texttt{article}?  Does \LaTeX{} do other things?  And what's an
+article anyway?
+
+\LaTeX{} has several built-in document classes: \texttt{article},
+\texttt{report}, \texttt{book}, \texttt{slides}, and \texttt{letter},
+each of which are used pretty much for precisely what the name
+implies.  \texttt{article} is also used, as you have learned, in more
+general situations as the generic document class.  These are not on
+the only document classes in existence, as individuals and
+organizations can write their own, but they are the standard ones.
+
+\section{Standard \LaTeX{} Document Classes}
+\label{sec:stand-latex-class}
+
+\subsection{Article}
+\label{sec:article}
+
+\texttt{article} is used for, as the name implies, journal articles.
+It is the most basic \LaTeX{} document class, as it has few special
+commands and quirks.  (This may be less because \texttt{article} is
+somehow inherently superior and more because it is the document class
+everyone thinks of first.  But maybe that makes it inherently
+superior.)  The title and associated information is centered by the
+\verb|\maketitle| command.  If one wants to include an abstract, this
+can be done with the \texttt{abstract} environment.
+
+\subsection{Report}
+\label{sec:report}
+
+\texttt{report} is very similar to \texttt{article}.  However, it is
+designed to be used for longer documents, and as such, has two
+additional sectioning commands: \verb|\chapter| and \verb|\part|.
+Additionally, as one might expect, the title information appears on a
+title page rather than simply at the top of the first page.  The
+abstract gets its own page as well.
+
+\subsection{Slides}
+\label{sec:slides}
+
+\texttt{slides}, not very surprisingly, makes slides.  The slides are
+meant to be printed and projected, rather than projected from the
+computer as you might with a PowerPoint.  This isn't to say you can't
+do it, but people have written other document classes to achieve this
+end.  Additionally, \texttt{slides} documents are a bit trickier in
+their construction than other types of documents.  In general, it is
+best to stay away from \texttt{slides} unless you actually intend to
+print them and project them on an overhead.  If you are interested in
+creating computer presentations for use on screen projectors, use
+Beamer, an add-on to \LaTeX{} that provides just such a functionality.
+Continuing with \texttt{slides}, we're going to look at the general
+format first and then make some more general comments.
+
+\subsubsection{Format of a \texttt{slides} Document}
+\label{sec:form-slides-docum}
+
+\begin{verbatim}
+\documentclass{slides}
+preamble
+\title{title}
+\author{author}
+\date{date}
+
+\begin{document}
+\maketitle
+
+\begin{slide}
+  slide content
+\end{slide}
+
+\end{document}
+\end{verbatim}
+
+The things that one should take from this skeleton of an example is
+that the document class is called \texttt{slides}, not \texttt{slide}
+(this is a seemingly small detail, but when your documents won't
+compile because you forgot what the document class was called, that's
+going to become an important point); the title information does not go
+within a slide, it goes before the slides start; lastly, the contents
+of each slide are set off within a \texttt{slide} environment.
+
+There's some information you probably didn't glean from the little
+skeleton (good job if you figured this out, because the information is
+not in the example to be observed).  First, a fact that you may want
+to know or just care about: \texttt{slides} uses a different default
+font than the other \LaTeX{} document classes.  Additionally, it is
+your responsibility to make sure that what you want to go on one slide
+fits on one slide.  If the stuff between the \verb|\begin{slide}| and
+  \verb|\end{slide}| is going to spill over onto another page,
+\LaTeX{} lets it and simply doesn't number the overflow slide(s).
+
+\texttt{slides} documents can have two other environments besides
+\texttt{slide}: \texttt{overlay} and \texttt{note}.  \texttt{overlay}
+is used for making a slide designed to be placed over the slide
+environment preceding it.  As a result, overlays aren't numbered in
+the same way as slides; the first overlay corresponding to the fourth
+slide would be numbered 4-a.  In order to get the text on the overlay
+to line up correctly, it is best to include the text from the slide
+with the color set to white.  This can be accomplished with
+\verb|\textcolor{white}{text}|.
+
+The \texttt{note} environment allows one to make notes corresponding
+to each slide.  Each note is numbered according to its corresponding
+slide, so the first note corresponding to the fourth slide would be
+numbered 4-1.
+
+\subsection{Letters}
+\label{sec:letters}
+
+The \texttt{letter} document class has several commands specific to
+it.  It bears some similarity to the \texttt{slides} class because you
+can have multiple letters in one document.  The return address is
+controlled by the \verb|\address| command in the preamble.  Each line
+of the return address (and the other command arguments in letters, if
+necessary) is separated by a $\backslash\backslash$.  The start of the
+\texttt{letter} environment is structured as
+\begin{verbatim}
+\begin{letter}{addressee}
+\end{verbatim}
+where \emph{addressee} is both the name and address of the addressee.
+Next comes the \verb|\opening{opening}| argument, which has as its
+argument the opening of the letter.  The letter concludes with the
+\verb|\closing{}| and \verb|\signature{}| commands where
+\verb|\closing| takes the closing of the letter and
+\verb|\signature| the name and/or title appearing under the
+signature as their arguments.  The \verb|\cc| and \verb|\encl|
+commands are optional and take the names of those receiving copies
+and the list of enclosures.
+
+\section{Nonstandard Document Classes}
+\label{sec:nonst-docum-class}
+
+There are many nonstandard document classes out there, but two of the
+most popular ones are the KOMA-Script document class bundle and the
+\texttt{memoir} document class.  They are meant to serve as
+replacements to the default \LaTeX{} document classes, offering more
+features, and in both cases, typographically better documents.
+Besides those two, the \AmS{} provides its own document classes for
+articles, books, and monographs that are submitted to various
+mathematical journals.
+
+\subsection{KOMA-Script\protect\footnote{\url{http://www.ctan.org/tex-archive/help/Catalogue/entries/koma-script.html}}}
+\label{sec:koma-script}
+
+The KOMA-Script bundle (written by Markus Kohm) provides drop-in
+replacements for the \texttt{article}/\texttt{report}/\texttt{book}
+classes with emphasis on typography and versatility.  There is also a
+letter class, different from all other letter classes.  It also offers
+a package for calculated type areas in the way laid down by the
+typographer Jan Tschichold, a package for easily changing and defining
+of page styles, a package for getting not only the current date, but
+also the name of the day, and a package for getting the current time.
+All these packages may be used not only with KOMA-Script classes, but
+also with standard classes.
+
+The equivalents to the \texttt{article}, \texttt{report},
+\texttt{book}, and \texttt{letter} classes are \texttt{scrartcl},
+\texttt{scrrprt}, \texttt{scrbook}, and \texttt{scrlttr2},
+respectively.  By default, the paper size for all four classes is set
+to A4 paper, so you have to manually change it to letter paper by
+using
+\begin{verbatim}
+\documentclass[letterpaper]{foo}
+\end{verbatim}
+where \texttt{foo} is the name of the KOMA-Script document class you
+want to use. Furthermore, the default font is set to 11pt.  Please see
+the KOMA-Script documentation for more details on the classes.
+
+\subsection{Memoir\protect\footnote{Taken from the README file in the
+    CTAN directory
+    (\url{http://www.ctan.org/tex-archive/macros/latex/contrib/memoir/})}}
+\label{sec:memoir}
+
+The \texttt{memoir} class is a flexible class for typesetting poetry,
+fiction, non-fiction, and mathematical works as books, reports,
+articles, or manuscripts.\footnote{This reader was typeset using the
+  \texttt{memoir} class.}  It is meant to replace the standard
+\LaTeX{} document classes, particularly the \texttt{report} and
+\texttt{book} document classes.  Documents can use 9pt, 10pt, 11pt,
+12pt, 14pt, or 17pt as the normal font size.  Many methods are
+provided to let you create your particular design.  The class
+incorporates over thirty of the more popular packages.  It was written
+by Peter Wilson.  See the documentation for more information on the
+wealth of customizations for the document class.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "reader"
+%%% End: 

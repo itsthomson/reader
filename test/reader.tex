@@ -1,0 +1,50 @@
+\documentclass[11pt,twoside]{memoir}
+
+\usepackage{readerpackage}
+
+\title{\LaTeX{} for Math and Science} \author{Cordelia Csar \and
+  Elizabeth Dyer \and Fernand Garin \and Alan Leong \and Thomson
+  Nguyen \and Dan Volmar} \date{February 9, 2008}
+
+\begin{document}
+
+\frontmatter
+
+\begin{titlingpage}
+  \calccentering{\unitlength}
+  \begin{adjustwidth*}{\unitlength}{-\unitlength}
+    \maketitle
+  \end{adjustwidth*}
+\end{titlingpage}
+
+\tableofcontents
+\listoftables
+
+\mainmatter
+\include{overview}
+\include{typeset}
+\include{mathmode}
+\include{moremathmode}
+\include{mathexamples}
+\include{tables}
+\include{doc_classes}
+\include{packages}
+\include{newcommands}
+\include{bibliography}
+
+\appendix
+\appendixpage
+
+\include{software}
+\include{mathcommands}
+\include{listpackages}
+\include{commonerrors}
+
+\backmatter
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

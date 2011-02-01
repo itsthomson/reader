@@ -1,0 +1,26 @@
+\documentclass[danish,a4paper,11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{slantsc}
+\setkomafont{subsection}{\usefont{T1}{fvm}{m}{n}}
+\setkomafont{section}{\usefont{T1}{fvs}{b}{n}\Large}
+\setcounter{secnumdepth}{0}
+\pagestyle{empty}
+\usepackage[T1]{fontenc}
+\usepackage[urw-garamond]{mathdesign}
+
+\begin{document}
+\section*{Garamond}
+\subsection*{\textbackslash normalfont}
+\normalfont\normalfont
+\input catalogue
+\subsection*{\textbackslash itshape}
+\normalfont\itshape
+\input catalogue
+\section{Math}
+\normalfont
+\[
+\mathbf{B}(P)=\frac{\mu_0}{4\pi}\int\frac{\mathbf{I}\times\hat{r}'}{r'^2}dl = \frac{\mu_0}{4\pi}\int\frac{d\mathbf{l}\times\hat{r}'}{r'^2}dl
+\]
+
+\end{document}

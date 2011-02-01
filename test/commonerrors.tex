@@ -1,0 +1,542 @@
+\chapter{Common Errors}
+\label{cha:common-errors}
+
+If you have every compiled a \LaTeX{} document, chances are high you
+have received a few error messages.  Sometimes they come from
+something as stupid and as easy to fix as forgetting a parenthesis or
+forgetting to end an environment.  There are also a lot more cases
+where you have no idea what you have done wrong and it takes you a
+long time to find or even understand your error.
+
+The purpose of this is to explain some of the common errors that may
+happen when compiling a \LaTeX{} document and suggestions for what is
+probably going on and how to debug your document.
+
+\section{The Form of an Error}
+\label{sec:form-an-error}
+
+There are two forms of errors: \LaTeX{} errors and \TeX{} errors.  In
+both types of errors, the part after the error message will tell you
+where the error occurred.  An example:
+\begin{verbatim}
+l.15 <offending text>
+\end{verbatim}
+The \texttt{l.15} tells you what line the error occurred on and the
+text will tell you the text that caused the error.
+
+\subsection{\LaTeX{} Errors}
+\label{sec:latex-errors}
+
+The general form of an error in \LaTeX{} is shown below:
+\begin{verbatim}
+! LaTeX error: <error message>
+
+See the LaTeX manual or LaTeX Companion for
+explanation.
+Type H <return>   for immediate help.
+...
+\end{verbatim}
+
+The \texttt{!} lets you know that the error has occurred.  The error
+message will tell you what type of error you have committed.  After
+the ellipses, you will find the line at which the error occurred and
+the text that caused the error (or at least the text where \LaTeX{}
+found the error).
+
+\subsection{\TeX{} Errors}
+\label{sec:tex-errors}
+
+Errors may also have the following form:
+\begin{verbatim}
+! <error message>
+\end{verbatim}
+
+These errors are formatted differently because they are error messages
+that came from \TeX{} instead of \LaTeX{}.  After the error, you will
+still find the line that the error occurred in and the text of the
+error.
+
+\section{Warnings}
+\label{sec:warnings}
+
+There are some error messages that are just warnings and will not stop
+or change the compilation of the document.  Chances are you have seen
+them many times.
+
+\subsection{Underfull}
+\label{sec:underfull}
+
+The following error results when a line does not extend the width of
+the page, something \LaTeX{} always tries to accomplish:
+\begin{verbatim}
+Underfull \hbox (badness 10000) in paragraph at lines
+104--107
+\end{verbatim}
+
+This error message is just a warning and is not something to worry
+about.  For the most part, when a line does not span the width of the
+page, it is because you have written something that you want to only
+cover part of the page.
+
+\subsection{Overfull}
+\label{sec:overfull}
+
+The following error results when a line extends beyond the width of
+the page:
+\begin{verbatim}
+Overfull \hbox (16.04988pt too wide) in paragraph at
+lines 30--31 [] [] \OT1/cmtt/m/n/12 I'm trying to put
+way too much text into a line in my document.
+\end{verbatim}
+Usually this error comes form when you are using the \texttt{verbatim}
+package because it will not move to the next line if your text does
+not go to the next line.  The easiest way to fix this is to find the
+place in your document where this is occurring and change the text so
+that it fits to the page.
+
+This error will still show up if the text is still on the page but
+outside of the width of text that \LaTeX{} has set.  In this case, you
+are welcome to fix things so that the error does not show up or you
+can leave the text as it is.
+
+\subsection{References}
+\label{sec:references-1}
+
+The following warnings occur when references are changed when \LaTeX{}
+was compiled:
+\begin{verbatim}
+LaTeX Warning: Label(s) may have changed. Rerun to get
+cross-references right.
+
+LaTeX Warning: There were undefined references.
+
+LaTeX Warning: Reference `name' on page 1 undefined on
+input line 15.
+\end{verbatim}
+
+The way to fix these errors is to recompile the document again to
+correct the page numbers.  Sometimes it is necessary to recompile the
+document twice to fix this error.  You also may have defined a
+reference wrong, so you should check to make sure your label is
+correct.
+
+\section{Beginning and Ending}
+\label{sec:beginning-ending}
+
+\subsection{Begin Ended by End}
+\label{sec:begin-ended-end}
+
+This type of error occurs when each environment is not correctly
+started and ended.  When you are missing an \verb|\end| command, the
+following error will show up:
+\begin{verbatim}
+! LaTeX Error: \begin{enumerate} on input line 23
+ended by \end{document}.
+\end{verbatim}
+
+To fix this, you need to end the environment mentioned in the error
+with the appropriate command.
+
+When you are missing a \verb|\begin| command, the following will appear:
+\begin{verbatim}
+! LaTeX Error: \begin{document} ended by
+\end{itemize}.
+\end{verbatim}
+
+To fix this, you basically do the same thing as before, correctly
+beginning the environment mentioned in the error with the appropriate
+command.
+
+\subsection{End Occurred Inside a Group}
+\label{sec:end-occurred-inside}
+
+The following error message will show up at the end of compiling a
+file if an environment is begun that is not ended:
+\begin{verbatim}
+(\end occurred inside a group at level <n>)
+\end{verbatim}
+
+To fix this error, make sure you end the environment that was begun.
+The previous error is more helpful in finding the \verb|\begin|
+statement.
+
+\subsection{Ended by End of Line}
+\label{sec:ended-end-line}
+
+The following error will occur when you try to place a command inside
+a section heading:
+\begin{verbatim}
+! LaTeX Error: \verb ended by end of line.
+
+See the LaTeX manual or LaTeX Companion for
+explanation.
+Type H <return>   for immediate help.
+...
+\end{verbatim}
+
+There will be many errors of the same type for this mistake.  In order
+to find where you put the command, look in the output file and find
+the last heading that shows up.
+
+\subsection{Missing Begin Document}
+\label{sec:miss-begin-docum}
+
+This error is self-explanatory:
+\begin{verbatim}
+! LaTeX Error: Missing \begin{document}
+\end{verbatim}
+
+\section{Errors Usually Caused by Bad Spelling}
+\label{sec:errors-usually-caus}
+
+\subsection{Unknown Control Sequence}
+\label{sec:unkn-contr-sequ}
+
+This error results when you use a command (something that starts with a
+\texttt{$\backslash$}) that is not recognized by \LaTeX{}:
+\begin{verbatim}
+! Undefined control sequence.
+\end{verbatim}
+
+Usually this error results from spelling a command incorrectly.  Go to
+the line that is indicated by the error and fix the command.
+
+\subsection{Environment Undefined}
+\label{sec:envir-undef}
+
+This error results when you begin an environment with a \verb|\begin|
+command that is not recognized:
+\begin{verbatim}
+! LaTeX Error: Environment verbatin undefined.
+\end{verbatim}
+
+Usually you have just spelled your environment incorrectly, so you
+just need to fix it.
+
+\subsection{Bad File Name}
+\label{sec:bad-file-name}
+
+This error results when you have mistyped the command \texttt{latex}
+or do not have \LaTeX{} installed on your computer:
+\begin{verbatim}
+Bad command or file name
+\end{verbatim}
+To fix this, correctly spell the command to compile your file or make
+sure that \LaTeX{} is correctly installed on your computer.
+
+\subsection{Cannot Find File Name}
+\label{sec:cannot-find-file}
+
+This error occurs when you try to compile a file that the computer
+cannot find:
+\begin{verbatim}
+! I can't find file `sample'.
+<*> sample
+
+Please type another input file name:
+\end{verbatim}
+
+To fix this error, make sure you have spelled the file name
+correctly.  You also may be in the wrong directory to compile the
+file, so check to make sure you are in the same directory as your
+file.
+
+\section{Fatal Errors}
+\label{sec:fatal-errors}
+
+\subsection{Runaway Argument}
+\label{sec:runaway-argument}
+
+This error happens when a paragraph ends before a command's argument
+is done (i.e., \LaTeX{} thinks that there is a missing \}):
+\begin{verbatim}
+Runaway argument?
+\end{verbatim}
+
+To fix this, you should use a different command to accomplish what you
+are trying to do.  An example of this is to use \verb|\bfseries|
+instead of \verb|\bftext| to make bold text in more than one
+paragraph.
+
+This error can also be caused by a missing mandatory argument to a
+command.
+
+\subsection{Just an *}
+\label{sec:just-an-asterisk}
+
+This error normally occurs when you do not end your document with \\ \verb|\end{document}|:
+\begin{verbatim}
+*
+\end{verbatim}
+
+If you are prompted to enter something in, it is best to enter
+\begin{verbatim}
+\end{document}
+\end{verbatim}
+and hope it works.  Be sure to end your document
+with the appropriate command.
+
+\subsection{Emergency Stop}
+\label{sec:emergency-stop}
+
+This error happens when \LaTeX{} will stop trying to compile your
+document due to a serious error:
+\begin{verbatim}
+! Emergency stop.
+\end{verbatim}
+To fix this error, you will need to figure out what caused it to stop
+compiling.  Chance are you forgot to end your document with
+\verb|\end{document}|, but there might also be another reason for the
+emergency stop.
+
+\subsection{Please Type a Command or Say End}
+\label{sec:please-type-command}
+
+This error happens when your file has ended prematurely:
+\begin{verbatim}
+(Please type a command or say `\end')
+\end{verbatim}
+
+The best way to deal with this type of error is to type
+\begin{verbatim}
+\end
+\end{verbatim}
+or
+\begin{verbatim}
+\end{document}
+\end{verbatim}
+in the case that the absence of that command
+caused the error.  Usually if you have ended your document correctly,
+the error will result from a missing \} or forgetting to end a
+verbatim environment.
+
+\section{Graphics Errors}
+\label{sec:graphics-errors}
+
+\subsection{Too Many Unprocessed Floats}
+\label{sec:too-many-unprocessed}
+
+This error occurs when figures or tables (i.e., floats) have not been
+typeset:
+\begin{verbatim}
+! LaTeX Error: Too many unprocessed floats.
+\end{verbatim}
+
+\LaTeX{} can only have so many floats waiting to be typeset.  In order
+to fix this error, make sure that you are placing your floats where
+you want them (with a \texttt{[h]} option) and not wanting too many on
+one page in sequence.  Using the command \verb|\clearpage| can be very
+useful in distributing floats correctly.
+
+\subsection{Unknown Graphics Extension}
+\label{sec:unkn-graph-extens}
+
+The following error occurs when you try to use a type of graphic that
+is not supported by the type of file that you are producing:
+\begin{verbatim}
+! LaTeX Error: Unknown graphics extension: .gif
+\end{verbatim}
+
+In order to fix this error, you should change your graphics to the
+types that are supported by the type of file you are outputting or you
+will need to include the correct package to deal with that type of
+graphic.  Sometimes you may have named the graphic poorly so that
+\LaTeX{} will not recognize it as a graphic file.
+
+\subsection{Division by Zero}
+\label{sec:division-zero}
+
+The following error occurs when the height of a graphic object is zero:
+\begin{verbatim}
+! Package graphics Error: Division by 0.
+\end{verbatim}
+
+This is usually caused when you rotate an object with zero depth so
+that its height becomes zero.  The best way to fix this is to use the
+keyword \texttt{totalheight} instead of \texttt{height}.
+
+\section{Math Errors}
+\label{sec:math-errors}
+
+\subsection{Display Math Should End With \$\$}
+\label{sec:display-math-should}
+
+This error occurs when the displaymath or equation mode is ended incorrectly:
+\begin{verbatim}
+! Display math should end with $$
+\end{verbatim}
+
+To fix this error, make sure that you end the displaymath or equation
+mode correctly (ending them with a \$ is not acceptable).
+
+\subsection{Bad Math Environment Delimiter}
+\label{sec:bad-math-environment}
+
+This error occurs when you do not have your delimiters correct in math
+mode:
+\begin{verbatim}
+! LaTeX Error: Bad math environment delimiter.
+\end{verbatim}
+
+Usually this occurs when you forget to match a right delimiter with
+every left delimiter.  This error may also happen when you forget to
+end an array.
+
+\subsection{Missing Right}
+\label{sec:missing-right}
+
+This error occurs when you have a missing right parenthesis:
+\begin{verbatim}
+! Extra \right.
+\end{verbatim}
+
+To fix this, you either need to add a \verb|\right| command or you
+need to end an array.
+
+\subsection{Missing Delimiter}
+\label{sec:missing-delimiter}
+
+This error message occurs when a delimiter is missing:
+\begin{verbatim}
+! Missing delimiter (. inserted).
+\end{verbatim}
+
+To fix this error, you need to make sure that you have a right
+delimiter for every left delimiter.  If you do not want a right
+delimiter matching a left delimiter, you need to use ``.''\ to not
+have an error message show up.
+
+\subsection{Missing \$ Inserted}
+\label{sec:missing--inserted}
+
+The following error occurs when you try to use a character that can
+only be used in math mode, like \_ or \^{}:
+\begin{verbatim}
+! Missing $ inserted
+\end{verbatim}
+
+To fix this error, make sure you change the character to what it
+should be in text mode.
+
+\section{Tabular Environment Errors}
+\label{sec:tabul-envir-errors}
+
+\subsection{Misplaced Alignment Tab Character \&}
+\label{sec:mispl-alignm-tab}
+
+This error occurs when you use \texttt{\&} and when you are not in a
+tabular environment:
+\begin{verbatim}
+Misplaced alignment tab character &
+\end{verbatim}
+
+To fix this error, you need to use \verb|\&| to make a \&.
+
+\subsection{Extra Alignment Tab}
+\label{sec:extra-alignment-tab}
+
+This error occurs when you use too many tabs for the number of columns
+in a table:
+\begin{verbatim}
+! Extra alignment tab has been changed to \cr
+\end{verbatim}
+
+The result of this error is that a new row is formed where the extra
+tab was.  You should go back and fix your table so that the correct
+number of items in each row would show up.
+
+\subsection{Argument Has an Extra \}}
+\label{sec:argument-has-an}
+
+These errors happen when an incorrect number of arguments to a tabular
+environment have been specified:
+\begin{verbatim}
+! Argument of \cline has an extra }.
+
+! Argument of \multicolumn has an extra }.
+\end{verbatim}
+
+To fix this error, make sure your arguments to the tabular environment
+are correct.
+
+\section{Errors With Lists}
+\label{sec:errors-with-lists}
+
+\subsection{Missing Item}
+\label{sec:missing-item}
+
+This error occurs when there is plain text in an environment that
+takes items:
+\begin{verbatim}
+! LaTeX Error: Something's wrong--perhaps a missing
+\item.
+\end{verbatim}
+
+To fix this error, make sure the plain text is changed into an item.
+
+\subsection{Too Deeply Nested}
+\label{sec:too-deeply-nested}
+
+This error occurs when there are too many lists for \LaTeX{} to
+handle:
+\begin{verbatim}
+! LaTeX Error: Too deeply nested
+\end{verbatim}
+
+\LaTeX{} can only handle four levels of one type of list and six
+levels of different types of lists.  To fix this, you need to use less
+levels of lists or define your own list environment.
+
+\section{Miscellaneous Errors}
+\label{sec:miscellaneous-errors}
+
+\subsection{Only Used in the Preamble}
+\label{sec:only-used-preamble}
+
+This error occurs when you place a command in the body of a \LaTeX{}
+document that should be placed in the preamble:
+\begin{verbatim}
+! LaTeX Error: Can be used only in the preamble.
+\end{verbatim}
+
+To fix this error, just move the command to the preamble.
+
+\subsection{There Is No Line/Page Here to End}
+\label{sec:there-no-linepage}
+
+This error occurs when you incorrectly use the commands that make a
+new line or a new page:
+\begin{verbatim}
+! LaTeX Error: There's a no line here to end.
+\end{verbatim}
+
+You may just leave the command that is making a new line in place or
+you can take it out.  Here, \LaTeX{} is just trying to make sure that
+everything looks nice.
+
+\subsection{Command Already Defined}
+\label{sec:comm-alre-defin}
+
+This error occurs when you try to define a command that already exists:
+\begin{verbatim}
+! LaTeX Error: Command ... already defined.
+\end{verbatim}
+
+To fix this, you need to define your command differently.
+
+\subsection{Missing Number}
+\label{sec:missing-number}
+
+This error is made when a number is expected as an argument and one is
+not provided:
+\begin{verbatim}
+! Missing number, treated as zero.
+\end{verbatim}
+
+To fix this error, you need to find where a number is expected so that
+you can provide the correct one.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "reader"
+%%% End: 

@@ -1,0 +1,535 @@
+\chapter{Typesetting Text}
+\label{cha:typesetting-text}
+
+\LaTeX{} differs from common word processors in that it requires the
+author to indicate the logical structure of the document.  This
+involves identifying sections, subsections, titles, and paragraphs
+among others.  Only then will \LaTeX{} derive a text document that
+looks remotely like what you intended it to be.  In this chapter, we
+will cover the basic structure of every \LaTeX{} document in addition
+to simple formatting commands available in \LaTeX{}.  We begin with
+the syntactic structure of basic \LaTeX{} documents.
+
+\section{Structure}
+\label{sec:structure}
+
+Like any programming language, \LaTeX{} enjoys a very strict and
+unforgiving structure.
+
+\subsection{Command Structure}
+\label{sec:command-structure}
+
+Commands in \LaTeX{} have a very intuitive and flexible structure,
+like most programming languages.  Most of the commands that you will
+encounter in \LaTeX{} will look like this:
+\begin{verbatim}
+\command{argument}
+\end{verbatim}
+where the name of the command replaces \texttt{command}, and any
+argument or modifiers you have replace \texttt{argument}.  Some
+examples include
+\begin{verbatim}
+\texttt{Text} \textit{Text} \textbf{Text}
+\end{verbatim}
+The first example will make text a cool
+typewriter font, while the second and third examples will make your
+text \textit{italic} and \textbf{bold}, respectively.  Note that all
+commands start with a backslash.
+
+\subsection{Environment Structure}
+\label{sec:envir-struct}
+
+Environments are special commands that modify large blocks of text.
+Environments almost always start with \verb=\begin{environment}=, and
+  end with \verb=\end{environment}=, where the name of the environment
+replaces \textit{environment}.  The portion of the document between
+the \verb=\begin{}= and \verb=\end{}= is in the selected environment.
+An environment affects the behavior of \LaTeX{}.  For example, here is
+an environment called \texttt{texttt} which alters the font \LaTeX{}
+uses:
+\begin{verbatim}
+\begin{texttt}
+  This is typewriter text
+\end{texttt}
+\end{verbatim}
+
+Documents themselves are also environments:
+\begin{verbatim}
+\begin{document}
+Document goes here.
+\end{document}
+\end{verbatim}
+
+The second example is something that will be used quite often: it's
+the beginning and ending arguments for a document!
+
+\subsection{Document Structure}
+\label{sec:document-structure}
+
+Here's a sample document that outlines the basic structure of
+\LaTeX{}:
+\begin{boxedverbatim}
+  \documentclass[12pt]{article}
+  \usepackage{amsmath}
+  
+  \title{Some Really Important Results}
+  \author{My Name}
+    
+  \begin{document}
+  \maketitle
+    
+    \chapter{Chapter Name}
+    A Document Body would go here.
+    
+    \section{The First Section}
+    Here's the first section of my document.  It's
+    wicked cool.
+    
+    \section{The Second Section}
+    Here's the second section of my document.  This
+    is twice as cool as the previous one.
+    
+    \subsection{A Subsection}
+    Sometimes things aren't important enough to get
+    their own section, so here's a subsection.
+    
+    \subsubsection{Subsubsections Exist?}
+    I guess they do.
+    
+    \paragraph{Paragraph Title}
+    Why paragraph have titles, I have no idea.
+    
+    \section*{The Third Section}
+    This is the third section of my document, but
+    this will show without a number because of the
+    asterisk.
+  \end{document}
+\end{boxedverbatim}
+
+When compiled, it'll look something like this:
+\begin{framed}
+  {\noindent\huge \textbf{Chapter 1}} \\[1cm]
+  {\Huge \textbf{Chapter Name}} \\[0.25cm]
+  A Document Body would go here. \\[0.5cm]
+    
+  {\noindent\Large \textbf{1.1 \quad The First Section}} \\[0.25cm]
+  Here's the first section of my document.
+  It's wicked cool. \\[0.5cm]
+    
+  {\noindent\Large \textbf{1.2 \quad The Second Section}} \\[0.25cm]
+  Here's the second section of my document.
+  This is twice as cool as the previous one. \\[0.5cm]
+    
+  {\noindent\large \textbf{1.2.1 \quad A Subsection}} \\[0.25cm]
+  Sometimes things aren't important enough to get
+  their own section, so here's a subsection. \\[0.5cm]
+    
+  \noindent\textbf{Subsubsections Exist?} \\[0.25cm]
+  I guess they do. \\[0.5cm]
+    
+  \noindent\textbf{Paragraph Title} \quad Why paragraph have titles, I have no
+  idea. \\[0.5cm]
+    
+  {\noindent\Large \textbf{The Third Section}} \\[0.25cm]
+  This is the third section of my document, but this will show without
+  a number because of the asterisk.
+\end{framed}
+
+\subsubsection{Preamble}
+\label{sec:preamble}
+
+One can see that before the actual document body, there's some weird
+text at the beginning of our sample document.  This is called the
+preamble of the document, and tells \LaTeX{} exactly how you want your
+document to be structured.  Our sample document uses the
+\texttt{article} document class, at 12pt font.  The title of your
+document goes in between the braces in the command \verb=\title{}=,
+while the author name(s) go in \verb=\author{}=.  You'll see that one
+package has been declared with \verb=\usepackage{}=, \texttt{amsmath};
+packages and \texttt{amsmath} will be covered in later chapters, so
+we'll just ignore it for now.  The preamble is ended with the command
+\verb=\begin{document}=, which begins our document.  One warning: In
+order for our title to display in \LaTeX{}, the titling command
+\verb=\maketitle= must be used \emph{immediately after}
+\verb=\begin{document}= has been declared.
+
+\subsection{Body}
+\label{sec:body}
+
+In most \LaTeX{} documents, you'll want to split your text up into
+discrete sections or parts in order to make reading your document
+accessible and easy to your readers.  \LaTeX{} makes this easy with
+special commands that are placed at strategic places in your document.
+To reiterate, Table~\ref{tab:sectioning-cmd} shows the available
+sectioning commands.
+\begin{table}[htbp]
+  \centering
+  \caption{Sectioning commands}
+  \label{tab:sectioning-cmd}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Command & Description \\
+    \midrule
+    \verb=\chapter{...}= & Starts a numbered chapter (Chapter 1) \\
+    \verb=\section{...}= & Starts a numbered section (Section 1.1) \\
+    \verb=\subsection{...}= & Starts a numbered subsection (Subsection
+    1.1.1) \\
+    \verb=\paragraph{...}= & Starts a paragraph (w/o numbering) \\
+    \verb=\subparagraph{...}= & Starts a subparagraph (w/o numbering)
+    \\
+    \verb=\part{...}= & Starts a part (with Roman numeral
+    numbering) \\
+    \bottomrule
+  \end{tabular}      
+\end{table}
+
+The mechanics of these commands will be explained later, but for now,
+it'll suffice to say that each successive command creates a smaller
+title, similar to the chapters and sections you see in your usual
+textbook.  It should be noted that the \verb=\chapter= command is
+available only in the \texttt{report} or \texttt{book} class.
+
+Note: If you want any of the numbered commands without the numbers
+(i.e., unmarked chapters), simply add a * at the end of the command.
+For example, \verb=\section*{Section}= will yield: \\[0.25cm]
+\begin{Large}
+  Section
+\end{Large} \\[0.25cm]
+\noindent instead of \\[0.25cm]
+\begin{Large}
+  1.1 \quad Section
+\end{Large}
+
+\section{Formatting}
+\label{sec:formatting}
+
+Just like any other word processor, \LaTeX{} enjoys a good deal of
+strict and unforgiving formatting commands.
+
+\subsection{Emphasizing Words}
+\label{sec:emphasizing-words}
+
+Just like any word processor, you can \underline{underline} and
+\textit{italicize} words whenever you see fit.  Underlining is done
+with the command \verb=\underline{}=, where the underlined text
+goes between the braces.  Italicization is done with
+\verb=\textit{}=, with the desired italicized text between the
+braces.  Likewise, \verb=\textbf{}= gives bold face.
+\begin{framed}
+\begin{verbatim}
+I like to \underline{underline} text here and
+\underline{everwhere}. I like it \textit{so}
+much, I can't \textit{\underline{stop!}}
+\end{verbatim}
+  I like to \underline{underline} text here and
+  \underline{everywhere}.  I like it \textit{so} much, I can't
+  \textit{\underline{stop!}}
+\end{framed}
+
+\subsection{Left/Right/Center Justification}
+\label{sec:leftr-just}
+
+Justification in \LaTeX{} is easy to do.  If you want to left-align
+text, you must put the text you want left-justified in the
+\texttt{flushleft} environment.  That is between the commands
+\verb=\begin{flushleft}= and \verb=\end{flushleft}=.
+\begin{framed}
+\begin{verbatim}
+\begin{flushleft}
+  Left-aligned text is fun.  I like left-aligned
+  text. I think you should like left-aligned text
+  too!
+\end{flushleft}
+\end{verbatim}
+  \begin{flushleft}
+    Left-aligned text is fun.  I like left-aligned text.  I think you
+    should like left-aligned text too!
+  \end{flushleft}
+\end{framed}
+
+If you have not figured it out already, right-aligned text is done
+with the \texttt{flushright} environment.
+\begin{framed}
+\begin{verbatim}
+\begin{flushright}
+  Whoa, this text is right-aligned.  What the heck?
+  Who uses right-aligned text anyway?
+\end{flushright}
+\end{verbatim}
+  \begin{flushright}
+    Whoa, this text is right-aligned.  What the heck?  Who uses
+    right-aligned text anyway?
+  \end{flushright}
+\end{framed}
+
+Centering text is also possible in \LaTeX{}, except instead of using
+the \texttt{flushcenter} environment (which doesn't even exist), we
+use the \texttt{center} environment by using the \verb=\begin{center}=
+  and \verb=\end{center}= commands.
+\begin{framed}
+\begin{verbatim}
+\begin{center}
+  This text is centered.  Centered text makes me
+  feel at peace. These examples make no sense,
+  don't they?
+\end{center}
+\end{verbatim}
+  \begin{center}
+    This text is centered.  Centered text makes me feel at peace.
+    These examples make no sense, don't they?
+  \end{center}
+\end{framed}
+  
+\subsection{Quotes and Verses}
+\label{sec:quotes-verses}
+
+When using quotation marks, it's probably a good idea \emph{not} to
+use the \texttt{"} key for opening and closing quotes.  Rather, we use
+two grave accent (` \!\!`) characters for opening quotes, and two
+single quotes ('') for closing quotes.
+\begin{description}
+\item[Bad] I think it was Kant who said "Let my people go."  Or
+  perhaps that was Moses.
+\item[Good] I think it was Kant who said ``Let my people go.''  Or
+  perhaps that was Moses.
+\end{description}
+If your quotation is long (say, more than four lines long), it might
+be a good idea to use the \verb=\begin{quote}= and \verb=\end{quote}=
+commands, as they will automatically be indented in text.  However,
+separate paragraphs within the \texttt{quote} environment won't be
+indented like regular paragraphs.  To do that, use the
+\texttt{quotation} environment instead.  Furthermore, to typeset
+poetic verses, use the \texttt{verse} environment.
+\begin{framed}
+  \noindent Quote:
+\begin{verbatim}
+One of my favorite quotes from \textit{Principles
+of Mathematical Analysis} goes something like this:
+\begin{quote}
+  If f is a continuous complex function on [a,b],
+  there exists a sequence of polynomials $P_n$ such
+  that $\lim_{n\rightarrow \infty} P_n(x)=f(x)$
+  uniformly on [a,b]. If f is real, the $P_n$ may
+  be taken real.
+\end{quote}
+
+Math is very fun!
+\end{verbatim}
+  One of my favorite quotes from \textit{Principles of Mathematical
+    Analysis} goes something like this:
+  \begin{quote}
+    If f is a continuous complex function on [a,b], there exists a
+    sequence of polynomials $P_n$ such that $\lim_{n\rightarrow\infty}
+    P_n(x)=f(x)$ uniformly on [a,b]. If f is real, the $P_n$ may be
+    taken real.
+  \end{quote}
+
+  Math is very fun!
+\end{framed}
+\begin{framed}
+  \noindent Quotation:
+\begin{verbatim}
+This text will contain a quotation with indentation
+very soon.  Maybe about now!
+\begin{quotation}
+  This quotation has indentations at the beginning
+  of every paragraph.
+
+  The quick brown fox jumps over the lazy dog.
+  Unfortunately, he jumped into hazardous terrain
+  and died.
+
+  Yoo hoo!
+\end{quotation}
+\end{verbatim}
+  This text will contain a quotation with indentation very soon.
+  Maybe about now!
+  \begin{quotation}
+    This quotation has indentations at the beginning of every
+    paragraph.
+
+    The quick brown fox jumps over the lazy dog.  Unfortunately, he
+    jumped into hazardous terrain and died.
+
+    Yoo hoo!
+  \end{quotation}
+\end{framed}
+\begin{framed}
+  \noindent Verse:
+\begin{verbatim}
+I know only one English poem by
+heart. It is about Humpty Dumpty.
+\begin{flushleft}
+  \begin{verse}
+    Humpty Dumpty sat on a wall:\\
+    Humpty Dumpty had a great fall.\\
+    All the King's horses and all
+    the King's men\\
+    Couldn't put Humpty together again.
+  \end{verse}
+\end{flushleft}
+\end{verbatim}
+  I know only one English poem by heart. It is about Humpty Dumpty.
+  \begin{flushleft}
+    \begin{verse}
+      Humpty Dumpty sat on a wall:\\
+      Humpty Dumpty had a great fall.\\
+      All the King's horses and all
+      the King's men\\
+      Couldn't put Humpty together again.
+    \end{verse}
+  \end{flushleft}
+\end{framed}
+
+\subsection{Line and Page Breaks}
+\label{sec:line-page-breaks}
+
+\LaTeX{} automatically breaks up lines, adds spaces between words, and
+auto-hyphenates words when necessary.  If you have noticed from this
+reader, every line is optimized so the lengths are the same.
+Normally, the first line of every paragraph is automatically indented,
+with no additional space between paragraphs.  When it becomes
+necessary to add a line break, two commands are available: \verb=\\=
+and \verb=\newline=.  Both will break an additional line.  \LaTeX{}
+will automaticallyl spill over to another page when there is too much
+content for one page; hence, premature page breaks are done with the
+command \verb=\newpage=.
+
+If you would like to doublespace a document, this is not easily
+accomplished with \LaTeX{}; however it is fairly straightforward with
+the use of a package.  See Section~\ref{sec:line-spacing} in the
+packages chapter.
+    
+\subsection{The Space Between Words\protect\footnote{Oetiker, Tobias, Hubert Partl, Irene Hyna, and Elisabeth Schlegl.  \emph{The Not So Short Introduction to \LaTeXe{}}.  May 2006.  p.\ 34}}
+\label{sec:space-betw-words}
+
+To get a straight right margin in the output, \LaTeX{} inserts varying
+amounts of space between the words.  It inserts slightly more space at
+the end of a sentence, as this makes the text more readable.  \LaTeX{}
+assumes that sentences end with periods, question marks, or
+exclamation marks.  If a period follows an uppercase letter, this is
+not taken as a sentence ending, since periods after uppercase letters
+normally occur in abbreviations.
+
+Any exception from these assumptions has to be specified by the
+author.  A backslash in front of a space generates a space that will
+not be enlarged.  A tilde `$\sim$' character generates a space that
+cannot be enlarged and additionally prohibits a line break.  The
+command \verb=\@= in front of a period specifies that this period
+terminates a sentence even when it follows an uppercase letter.
+
+The additional space after periods can be disabled with the command
+\verb=\frenchspacing=, which tells \LaTeX{} \emph{not} to insert more
+space after a period than after ordinary characters.  This is very
+common in non-English languages, except bibliographies.  If you use
+\verb=\frenchspacing=, the command \verb=\@= is not necessary.
+
+\section{The Title Block}
+\label{sec:cover-page}
+
+A title block is an easy way to make your document look professional;
+it is very easy to do in \LaTeX{}.  A title block in \LaTeX{} contains
+the title of the document, the author(s), and optionally the date. You
+can place a title block either at the top of your document or within a
+cover page, which is on a separate page and is not numbered; however,
+the cover page is only natively available in the \texttt{report} and
+\texttt{book} classes (you have to specify the \texttt{titlepage}
+option as an optional argument to the \texttt{article} document class
+to get it).
+
+To make a title page (or a title block), you need to declare its
+contents by including
+\begin{verbatim}
+\title{Why Word Sucks}
+\author{The Berkeley \LaTeX{} DeCal Staff
+\thanks{Supported by Professor Ribet} \\ Berkeley, CA
+\and The \LaTeX{} Community \\ Around the World}
+\date{2005}
+\end{verbatim}
+in the preamble, or any place before the command to make the cover
+page given by \verb=\maketitle=.  The \verb=\maketitle= command should
+then be placed right after the \verb=\begin{document}= command.
+
+As you can see in the sample declaration of the contents of the
+title block, you can use the \verb=\and= command to introduce
+multiple authors.  The \verb=\thanks= command creates footnotes
+(automatically numbered, of course; would you expect anything less
+from \LaTeX{}?) at the bottom of the cover page.  This can be
+accomplished by using the \verb=\\= command.  If you do not use the
+\verb=\date= command, today's date will automatically be inputted.
+
+\section{References}
+\label{sec:references}
+
+The way that \LaTeX{} deals with cross-references to other sections,
+tables, figures, or theorems is one of the best attributes of
+\LaTeX{}.  Usually, when referencing different sections, tables,
+figures, pages, etc., you have to manually look up what the number is
+and place it in your document.  This is fine if you never make any
+changes to your document, but we all know that everything seems to be
+revised constantly.  This can make it a huge pain to go back through
+all of your references to change all of them by one number.  \LaTeX{}
+avoids this annoyance by having a way to define and recall references.
+
+In order to reference something in \LaTeX{}, you need to define a
+label for the reference.  This is done by the command
+\verb=\label{marker}= where \texttt{marker} is the reference that you
+will need to remember to reference the part later.  The \verb=\label=
+command saves the last number that was generated so it is usually best
+to put it in the same line as the \verb=\begin= command for that part
+to make things standardized.
+
+If you are cross-referencing a table or a figure, you will need to put
+the label in the \verb=\caption= command.  Here is an example below:
+\begin{verbatim}
+\begin{figure}[!h]
+  \includegraphics{filename}
+  \caption{I hate graphics in \LaTeX{}}
+  \label{fig:hategraphics}
+\end{figure}
+\end{verbatim}
+
+Now if you want to reference the number of the thing you labeled, use
+the \verb=\ref{marker}= command using the \texttt{marker} that you
+chose before.  If I wanted to reference the figure example above, I
+would type
+\begin{verbatim}
+\ref{fig:hategraphics}
+\end{verbatim}
+You can also use \verb=~\ref{marker}= without a space between the word
+that precedes it.  To use this with the figure example above, I would
+type
+\begin{verbatim}
+Figure~\ref{fig:hategraphics}
+\end{verbatim}
+You can also reference the page number of a label by using the
+\texttt{pageref} command that is used in the same way as the
+\texttt{ref} command.
+
+\section{Footnotes}
+\label{sec:footnotes}
+
+In order to create footnotes in a \LaTeX{} document, you use the
+\verb=\footnote= command.  So that you know you are using
+footnotes correctly, footnotes should be placed after the word or
+sentence (after the comma or period) they are referring to. In the
+event a footnote within a section command is required, precede the
+\verb|\footnote| command with \verb|\protect|, like so:
+\begin{verbatim}
+\section{Foo\protect\footnote{This is a footnote!}}
+\end{verbatim}
+Here is an example of a footnote in action:
+\begin{verbatim}
+I like bananas. I know that mangoes are sweet. I like
+papayas. But I know that nothing can beat\ldots{}
+\LaTeX{}! Hell yes!\footnote{Based on a chant from %
+World Youth Day.}
+\end{verbatim}
+I like bananas. I know that mangoes are sweet. I like papayas. But I
+know that nothing can beat\ldots{}\LaTeX{}!  Hell yes!\footnote{Based on a
+  chant from World Youth Day.}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "reader"
+%%% End: 
