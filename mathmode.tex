@@ -1,0 +1,396 @@
+\chapter{Math Mode Basics}
+\label{cha:math-mode-basics}
+
+One common usage of \LaTeX{} is the typesetting of mathematical
+discourse and documents with mathematical content.  \LaTeX{} comes
+with a good deal of functionality in this area and has become a fairly
+standard tool in the math community.  In addition, the math
+typesetting abilities of \LaTeX{} can be further expanded by the use
+of the \AmS{-}\LaTeX{} packages.
+
+Packages in general will be discussed later, but for now, it suffices
+to add
+\begin{verbatim}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\end{verbatim}
+to the preamble of any document you are typesetting with math content.
+This places additional environments and symbols at your disposal that
+make life far easier.
+
+\section{Math Mode}
+\label{sec:math-mode}
+
+The key tool for typesetting mathematical content is math mode.  Math
+mode is accessed through a variety of math environments.  In math
+mode, the basic behavior of \LaTeX{} is altered in a few important
+ways.  First of all, the letters on the keyboard become constants and
+variables.  For example, an \verb=a= in math mode will be displayed as
+$a$ while in normal text, it is an a.  This gives them an italicized
+appearance to make them typographically different from their textual
+counterparts.  Note that this is not the same as typesetting text in
+italics, and math mode should never be used to italicize text.
+
+While in math mode, the fast majority of characters on your keyboard
+will continue to function as normal.  In addition to the letters
+available on the keyboard, there are a wide variety of other
+characters and symbols available through various \LaTeX{} commands.
+\LaTeX{} also offers an extensive array of hats, bars, and other
+useful accents.
+
+The math mode chapters do not have many examples.  However, there is a
+selection of examples following the chapters.
+
+\section{Math Environments}
+\label{sec:math-environments}
+
+\LaTeX{} is extremely powerful, not least in its ability to typeset
+math.  There are three math environments: \texttt{math},
+\texttt{displaymath}, and \texttt{equation}.  The inline environment
+allows the inclusion of math in a normal line of text, while the
+displayed environment enables one to set off lines of math.  The
+equation environment is essentially the same as the displayed
+environment, but each instance is numbered sequentially.  $x+y=z$ is
+an example of the inline environment, while \[x+y=z\] is the same
+thing in the displayed environment.
+
+\subsection{Inline Math}
+\label{sec:inline-math}
+
+Like other \LaTeX{} environments, inline math, or more accurately, the
+\texttt{math} environment, is delimited by \verb=\begin= and
+\verb=\end= commands.  In \TeX{}, inline math was set off by dollar
+signs.  This convention was carried over to \LaTeX{}, which allows us
+a shortcut, as all those \verb=\begin= and \verb=\end=s would get very
+tedious very quickly.  Using the \$ convention, the above example
+would appear in one's source as
+\begin{verbatim}
+$x+y=z$ is an example of the inline environment.
+\end{verbatim}
+
+\subsection{Displayed Math}
+\label{sec:displayed-math}
+
+The displayed math environment is formally delimited by
+\begin{verbatim}
+\begin{displaymath}
+\end{displaymath}
+\end{verbatim}
+However, one can also use $\backslash [$ at the beginning and
+$\backslash ]$ at the end of the statement.  Thus, using square
+brackets as the delimiters, \[x+y=z\] would appear in one's source as
+\begin{verbatim}
+\[x+y=z\]
+\end{verbatim}
+
+\subsection{Equations}
+\label{sec:equations}
+
+The equation environment returns to the conventional delimiters for
+environments.  It is accessed by \verb=\begin{equation}= and
+\verb=\end{equation}=.  Our example equation in the equation
+environment would appear as
+\begin{equation}
+  \label{eq:1}
+  x+y=z
+\end{equation}
+
+\subsection{Stars (Well, Asterisks Really)}
+\label{sec:stars-well-asterisks}
+
+Various environments and structures in \LaTeX{} will automatically
+number themselves, like the \texttt{equation} environment above.
+However, unlike \texttt{equation}, not everything has a separate
+unnumbered counterpart.  To avoid the numbering, an asterisk (*) is
+used to disable numbering.  This fact is of little concern now, but it
+is a fact to file away, as it will come up again later.
+
+\section{Commands}
+\label{sec:commands}
+
+If you take a look at the keyboard, you'll see a number of symbols
+that look fairly useful for typing math, including +, -, *, /, =, (,
+and ), essentially the same things you find on a small calculator.
+Which is all well and good, up to a point, but what about typing
+homework?  Or textbooks for that matter, as your math textbooks were
+most likely done with \LaTeX{}.  It is possible to include symbols in
+math environments that are not available on one's keyboard.  This is
+achieved through various commands.  With two important exceptions,
+math commands, like many other \LaTeX{} commands, begin with a
+backslash, $\backslash$.
+
+\subsection{Subscripts and Superscripts}
+\label{sec:subscr-superscr}
+
+The two exceptions to the commands beginning with a backslash are \^{}
+and \_, the commands for superscript and subscript, respectively.
+Thus, $x^2$ is entered as \verb=x^2= and $x_2$ as \verb=x_2=.  Note
+that \^{} and \_ only include the character immediately following,
+unless one encloses the subscript or superscript in brackets.
+Therefore, $x^{12}$ is entered as \verb=x^{12}=, not as \verb=x^12=,
+which is $x^12$.
+
+\subsection{Math Symbols}
+\label{sec:math-symbols}
+
+If you think back to the last homework assignment you did or the last
+textbook you read, you'll probably remember that math uses all sorts
+of symbols such as $\infty$, $\sum$, $\int$, and a whole host of
+non-Roman letters.  Appendix~\ref{cha:commonly-used-math} contains a
+table of various math symbols.  The commands work in essentially the
+same way as other \LaTeX{} commands.  Just remember that they only
+work in math mode.
+
+Frequently, it seems like a lot of bother to go sifting through
+appendices looking for a command.  Fortunately, many of the commands
+have fairly intuitive names, so if you're willing to risk errors, you
+can be lazy and guess.  At this point, you might be thinking, ``You
+said think about my last homework.  I didn't use half that stuff.  I
+had Greek letters, hats, and transposes coming out of my ears!''  We
+will get there in a few short paragraphs, so don't worry.
+
+\subsection{Delimiters}
+\label{sec:delimiters}
+
+In a very basic sense, delimiters are things like parentheses and
+brackets.  Parentheses and square brackets can be typeset with the
+matching key on the keyboard.  Other delimiters have specific
+commands.  Beyond the commands for different delimiters, it is
+important to know how to control the size of delimiters.  Let's say
+you wanted to put parentheses around a summation for some
+reason.  \[(\sum_{k=0}^{10} k)\] looks pretty silly because the
+parentheses are so small.  We can use \verb=\left= and \verb=right= to
+correct this problem.  When immediately followed by the approximate
+delimiter (i.e., one uses ( with \verb=\left=), \LaTeX{} will size
+the delimiter to what it thinks is the right size.  By writing
+\begin{verbatim}
+\left(\sum_{k=0}^{10}k\right)
+\end{verbatim}
+we get \[\left(\sum_{k=0}^{10}k\right)\] which looks a lot better.
+It is important to note that the left and right hand delimiters
+must be paired.  For example, attempting to compile
+\verb?$\left($? will result in an error.  It is possible to have a
+single left or right delimiter by pairing it with a
+\verb=\left.= or \verb=\right.= as appropriate.  If you only
+want a delimiter one one side, you can use \verb=\left= or
+\verb=\right= without a delimiter to complete the pair.  You
+also have the option of choosing the size of a delimiter with
+\verb=\big=, \verb=\Big=, \verb=\bigg=, and \verb=\Bigg=, which
+are used like \verb=\left= and \verb=\right= and give
+progressively larger delimiters.  The existence of these
+commands may seem a little puzzling, given that \LaTeX{} will
+size delimiters on its own, if you ask it to.  However, there
+are times when you will want to do it yourself.
+\begin{table}
+  \centering
+  \caption{Delimiters (those with commands)}
+  \label{tab:delimiters}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Delimiter & Command \\
+    \midrule
+    \{ & \verb=\{= \\
+    \} & \verb=\}= \\
+    $\backslash$ & \verb=\backslash= \\
+    $\langle$ & \verb=\langle= \\
+    $\rangle$ & \verb=\rangle= \\
+    $\|$ & \verb?\Vert? or \verb?\|? \\
+    $\lfloor$ & \verb?\lfloor? \\
+    $\rfloor$ & \verb?\rfloor? \\
+    $\lceil$ & \verb?\lceil? \\
+    $\rceil$ & \verb?\rceil? \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{More Math Commands}
+\label{sec:more-math-commands}
+
+Some of the major commands that take arguments are \verb?\frac? and
+\verb?\sqrt?, which typeset fractions and roots, respectively.  One
+writes a root by \verb?\sqrt{expr}?, where \texttt{expr} is replaced
+by what goes under the root.  If one wants the $n$th root, the full
+command is actually \verb?\sqrt[n]{expr}?, so $\sqrt[3]{x}$ is written
+as \verb?\sqrt[3]{x}?.  Likewise, fractions take the form of
+\verb?\frac?\{\textit{num}\}\{\textit{denom}\}.  Combinations, such as
+$\binom{a}{b}$ are written as
+\{\textit{combinations}\}\verb?\choose?\{\textit{objects}\} or
+\verb?\binom{combo}{obj}?.
+
+\subsection{Log-like Operators}
+\label{sec:log-like-operators}
+
+Occasionally, you will want to type things like \texttt{sin} and
+\texttt{det}, things that are both words and symbols.  \LaTeX{}
+provides commands for such operators to preclude any need to exit math
+mode and to allow for appealing spacing (shown in
+Table~\ref{tab:log-operator}).
+\begin{table}
+  \centering
+  \caption{Log-like operators}
+  \label{tab:log-operator}
+  \begin{tabular}{@{}llll@{}}
+    \toprule
+    Operator & Command & Operator & Command \\
+    \midrule
+    $\sin$ & \verb?\sin? & $\exp$ & \verb?\exp? \\
+    $\cos$ & \verb?\cos? & $\gcd$ & \verb?\gcd? \\
+    $\tan$ & \verb?\tan? & $\hom$ & \verb?\hom? \\
+    $\csc$ & \verb?\csc? & $\inf$ & \verb?\inf? \\
+    $\sec$ & \verb?\sec? & $\ker$ & \verb?\ker? \\
+    $\cot$ & \verb?\cot? & $\lg$ & \verb?\lg? \\
+    $\cosh$ & \verb?\cosh? & $\lim$ & \verb?\lim? \\
+    $\sinh$ & \verb?\sinh? & $\liminf$ & \verb?\liminf? \\
+    $\tanh$ & \verb?\tanh? & $\limsup$ & \verb?\limsup? \\
+    $\coth$ & \verb?\coth? & $\ln$ & \verb?\ln? \\
+    $\arcsin$ & \verb?\arcsin? & $\log$ & \verb?\log? \\
+    $\arccos$ & \verb?\arccos? & $\max$ & \verb?\max? \\
+    $\arctan$ & \verb?\arctan? & $\min$ & \verb?\min? \\
+    $\arg$ & \verb?\arg? & $Pr$ & \verb?\Pr? \\
+    $\deg$ & \verb?\deg? & $\sup$ & \verb?\sup? \\
+    $\det$ & \verb?\det? & $\dim$ & \verb?\dim? \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Accents}
+\label{sec:accents}
+
+Another group of math commands are what one might describe as
+modifiers for letters.  This would include bars and hats.  It might
+not come as a surprise that the command for $\hat{x}$ is
+\verb?\hat{x}?.  There is also \verb?\widehat?, which looks a bit
+better on capital letters.  Compare $\hat{T}$ to $\widehat{T}$.  This
+happens because \verb?\widehat? extends over everything enclosed in
+the brackets, whereas \verb?\hat?  simply centers a hat over what's
+enclosed in the brackets.  As a result, one can have $\widehat{xyz}$
+(\verb?\widehat{xyz}?)  rather than $\hat{xyz}$ (\verb?\hat{xyz}?).
+\verb?\tilde?  works the same way as \verb?\hat?.  There is also
+\verb?\widetilde?.  $\bar{x}$ is obtained by \verb?\bar{x}?.  It is
+worth noting that \verb?\widebar? does not exist.  Use
+\verb?\overline? to accomplish a similar effect.
+
+\section{Greek and Other Fancy Letters}
+\label{sec:greek-other-fancy}
+
+\subsection{Greek Letters}
+\label{sec:greek-letters}
+
+For the Greek alphabet, the commands are simply a backslash followed
+by the name of the letter.  For example, $\beta$ is \verb?\beta?.  As
+always, commands are case sensitive, so \verb?\Gamma? is $\Gamma$
+rather than $\gamma$.
+\begin{table}
+  \centering
+  \caption{Uppercase Greek letters}
+  \label{tab:uppercase-greek}
+  \begin{tabular}{@{}llll@{}}
+    \toprule
+    Letter & Command & Letter & Command \\
+    \midrule
+    $\Gamma$ & \verb?\Gamma? & $\Sigma$ & \verb?\Sigma? \\
+    $\Delta$ & \verb?\Delta? & $\Upsilon$ & \verb?\Upsilon?
+    \\
+    $\Theta$ & \verb?\Theta? & $\Phi$ & \verb?\Phi? \\
+    $\Lambda$ & \verb?\Lambda? & $\Psi$ & \verb?\Psi? \\
+    $\Xi$ & \verb?\Xi? & $\Omega$ & \verb?\Omega? \\
+    $\Pi$ & \verb?\Pi? & & \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\begin{table}
+  \centering
+  \caption{Lowercase Greek letters}
+  \label{tab:lowercase-greek}
+  \begin{tabular}{@{}llll@{}}
+    \toprule
+    Letter & Command & Letter & Command \\
+    \midrule
+    $\alpha$ & \verb?\alpha? & $\nu$ & \verb?\nu? \\
+    $\beta$ & \verb?\beta? & $\xi$ & \verb?\xi? \\
+    $\gamma$ & \verb?\gamma? & $\pi$ & \verb?\pi? \\
+    $\delta$ & \verb?\delta? & $\rho$ & \verb?\rho? \\
+    $\epsilon$ & \verb?\epsilon? & $\sigma$ & \verb?\sigma?
+    \\
+    $\zeta$ & \verb?\zeta? & $\tau$ & \verb?\tau? \\
+    $\eta$ & \verb?\eta? & $\upsilon$ & \verb?\upsilon? \\
+    $\theta$ & \verb?\theta? & $\phi$ & \verb?\phi? \\
+    $\iota$ & \verb?\iota? & $\chi$ & \verb?\chi? \\
+    $\kappa$ & \verb?\kappa? & $\psi$ & \verb?\psi? \\
+    $\lambda$ & \verb?\lambda? & $\omega$ & \verb?\omega? \\
+    $\mu$ & \verb?\mu? & & \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Fancy Fonts}
+\label{sec:fancy-fonts}
+
+The \AmS{} packages provide several fonts that allow for some rather
+useful letters and symnbols that are not available through previously
+discussed commands.  These fonts are selected by
+\verb?\[font command]{text}?.  This is most easily illustrated by an
+example such as \verb?$\mathbb{R}$?.  This command typesets a capital
+R in the math board bold font.  Compiled, it gives $\mathbb{R}$, the
+familiar R for the reals.
+
+Other fonts available from \LaTeX{} and the \AmS{} packages are shown
+in Table~\ref{tab:math-fonts}.
+\begin{table}
+  \centering
+  \caption{Math fonts}
+  \label{tab:math-fonts}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Font & Command \\
+    \midrule
+    $\mathbb{NQRZ}$ & \verb|\mathbb{}| \\
+    $\textrm{text}$ & \verb|\textrm{}| \\
+    $\text{text}$ & \verb|\text{}| \\
+    $\mathrm{math}$ & \verb|\mathrm{}| \\
+    $\mathbf{bold}$ & \verb|\mathbf{}| \\
+    $\mathsf{ABCXYZ}$ & \verb|\mathsf{}| \\
+    $\mathit{italics}$ & \verb|\mathit{}| \\
+    $\mathcal{ABCXYZ}$ & \verb|\mathcal{}| \\
+    $\mathfrak{ABCXYZ}$ & \verb|\mathfrak{}| \\
+    \bottomrule
+  \end{tabular}  
+\end{table}
+
+The board bold font is the most commonly used one.  Also of note are
+\verb?\textrm{}? and \verb?\mathrm{}?.  Both of these fonts override
+the default italicization in math mode.  \verb?\textrm{}? typesets
+text in a style identical to normal text mode and \verb?\mathrm?
+typesets text in normal upright letters, but slightly different for
+math.  A more detailed discussion of these differences can be found in
+Oetiker's \emph{The Not So Short Introduction to \LaTeX{}}.  Refer to
+Appendix~\ref{cha:commonly-used-math} for examples of some of these
+fonts.  If you would like to check on any of the other fonts, just
+experiment with a \LaTeX{} compiler.  Be aware that some of the fonts
+only work for capital letters.
+
+\subsection{Dots}
+\label{sec:dots}
+
+An ellipsis (three dots) is often handy in math mode.  \LaTeX{}
+provides a wide variety of ellipses.  They are shown in
+Table~\ref{tab:dots}.
+\begin{table}
+  \centering
+  \caption{Dots}
+  \label{tab:dots}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Symbol & Command \\
+    \midrule
+    \ldots & \verb?\ldots? \\
+    $\cdots$ & \verb?\cdots? \\
+    $\vdots$ & \verb?\vdots? \\
+    $\ddots$ & \verb?\ddots? \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "reader"
+%%% End: 

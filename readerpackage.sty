@@ -1,0 +1,55 @@
+\ProvidesPackage{readerpackage}
+\usepackage{amsmath,amssymb,amsthm,mflogo,booktabs,graphicx}
+% packages to specify fonts used
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo,helvet,eulervm}
+\usepackage[scaled=0.86124]{luximono}
+% microtypographical package
+\usepackage{microtype}
+% commutative diagrams
+\usepackage[all]{xy}
+% initial calculation of page layout
+\usepackage[BCOR12mm,DIVcalc]{typearea}
+% hyperref and memoir's fix for hyperref
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\usepackage{memhfixc}
+
+% This section deals with the formatting of the entire document.
+% Use the following command to play around with the running header style.
+%\pagestyle{ruled}
+\linespread{1.05} % because Palatino needs slightly larger leading
+\typearea[current]{calc} % recalculates page area because leading changed
+
+% This section deals with custom commands not previously defined
+% anywhere else.
+\newcommand{\texext}{\texttt{.tex}}
+\newcommand{\dviext}{\texttt{.dvi}}
+\newcommand{\BibTeX}{\textsc{Bib}\TeX{}}
+\newcommand{\MiKTeX}{MiK\TeX{}}
+\newcommand{\Dash}{---}
+\newcommand{\card}[1]{\overline{\overline{#1}}}
+
+% This command fixes the problem where the page link to the Appendices
+% page points to the wrong page (points to two pages prior).
+\def\addappheadtotoc{\phantomsection\addcontentsline{toc}{chapter}{\appendixtocname}}
+
+% This section deals with the formatting of the title.
+\setlength{\droptitle}{200pt}
+\pretitle{\begin{center}\HUGE}
+\posttitle{\par\end{center}\vskip 1em}
+\preauthor{\begin{center}
+  \Large \lineskip 0.5em%
+\begin{tabular}[t]{c}}
+\postauthor{\end{tabular}\par\end{center}\vskip 1em}
+\predate{\begin{center}\large}
+
+% This section deals with the formatting of captions.
+\captionnamefont{\bfseries}
+\hangcaption
+% \captionsetup{format=hang,labelfont=bf}
+% \captionsetup[table]{position=top,format=hang,labelfont=bf}
+
+% This section deals with theorems.
+\newtheorem{theorem}{Theorem}
+\newtheorem*{morse}{Morse Lemma}
+\newtheorem{thm}{Theorem}[subsection]

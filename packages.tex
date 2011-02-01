@@ -1,0 +1,160 @@
+\chapter{Packages}
+\label{cha:packages}
+
+\section{Package Overview}
+\label{sec:package-overview}
+
+\LaTeX{} itself is a large package of macros written in the \TeX{}
+language.  Accordingly, \LaTeX{} has been designed to facilitate the
+creation and usage of user-defined packages to extend the
+functionality of the \LaTeX{} system.  The large \LaTeX{}
+distributions, such as \MiKTeX{}, ship with an enormous library of
+packages and feature some kind of package managemetn software.  This
+makes it easy to download, install, and manage packages on a \LaTeX{}
+installation.  This chapter will summarize this and mention some of
+the most common \LaTeX{} packages.  Much more descriptive lists of
+packages are located in Appendix~\ref{cha:list-packages}.
+
+\section{Package Management}
+\label{sec:package-management}
+
+The base of a \LaTeX{} installation (or any other flavor of \TeX{}) is
+a directory called \verb|\texmf| by default.  Common locations for
+this directory include \verb|/usr/share/texmf| on Mac OS X, Unix, and
+Unix-like operating systems, and \verb|c:\texmf| on Windows operating
+systems.  This directory will contain a collection of fonts, packages,
+scripts, source code, etc.  The precise details will vary according to
+the distribution.  \TeX{} was designed for deployment on large UNIX
+systems, and the \texttt{texmf} tree is intended to be maintained by
+the system administrator and is generally off-limits to users.  In the
+days before \TeX{} distributions became common, an expert would have
+to manually compile and configure the installation for use in a
+network environment.  This remains the case in many multi-user
+networks.  For personalized needs, every user has a
+\texttt{localtexmf} directory in the home directory.  The contents of
+the \texttt{localtexmf} tree override those of the \texttt{texmf}
+tree.  This allows an individual user to load packages or fonts that
+are not in the main \texttt{texmf} tree without disturbing the
+delicate server-side installation and breaking \TeX{} for everyone on
+the network.
+
+However, the distinction between the main and local \TeX{} trees
+is less clear for single-user operating systems or those with weak
+multi-user support (i.e., Windows and Mac OS 9 and earlier).  In these
+cases, the users and administrator are the same person.
+
+The details of managing packages is different depending on the
+distribution.  It is best to refer to the documentation that comes
+with the \LaTeX{} distribution to see exactly how it is done.  The
+process is fairly straightforward in \MiKTeX{} as it features a
+graphical package management utility to automate the process.  The
+package manager will connect to a CTAN mirror, download the package,
+install it, and rehash the \TeX{} tree for you.
+
+This can also be done manually.  The documentation for your
+distribution or the package that you are installing should specify
+details.  The process involves three generic steps.  First, you must
+locate the package.  Nearly all mainstream packages reside on the CTAN
+mirrors.  Once you have the package in hand, you must place it in the
+desired location in your \TeX{} tree, typically an intuitively-named
+directory in \texttt{localtexmf}.  Lastly, you need to rehash the
+\TeX{} tree.  This rebuilds an index of all available packages that
+\TeX{} maintains, allowing the computer to locate the package you want
+when you request it from within a document.
+
+\LaTeX{} packages are typically installed in \verb|\texmf\tex\latex|.
+For organizational purposes, you may want to create a subdirectory for
+the package.  After copying the package, you must rehash the \TeX{}
+tree.  To save time, the \LaTeX{} compiler does not scan the \TeX{}
+tree for packages when run.  Rather, it refers to a configuration file
+to tell it which packages are installed, and where.  Typing
+\texttt{texhash} from the command line should run the executable that
+will refresh this file.  In Windows XP, the command line can be
+accessed by selecting Start $\rightarrow$ Run, and entering
+\texttt{cmd}.  On Mac OS X, the command line can be accessed from the
+\texttt{terminal} application in the Utilities folder.  On any Unix or
+Unix-like operating system, you should be knee-deep in ways to access
+a command line.  It is important to note that to hash the \TeX{} tree,
+you will need administrator privileges.  This is common on Windows and
+Mac OS, but you will need to either be root or use a program such as
+\texttt{sudo} on any Unix or Unix-like operating system.
+
+If your computer cannot find the appropriate programs to hash your
+\TeX{} tree (this will be somewhat more common on Windows than the
+other operating systems), you may have to find where the binaries for
+your \TeX{} installation are located to run \texttt{texhash}; refer to
+your documentation for specifics.
+
+\section{Packages of Interest}
+\label{sec:packages-interest}
+
+There are a ridiculous number of user-defined packages available on
+the Internet.  A typical \LaTeX{} installation should include the most
+common packages, as well as some that are not.  There are packages
+available to simplify typesetting tasks in law, medicine, linguistics,
+computer science, chemistry, music, and more, as well as mathematics.
+Even if you have a very specific need, someone has probably written a
+package to make it easy.  CTAN is the best and most organized source
+of packages, and when it doubt, \href{http://www.google.com}{Google}
+is your best friend.
+
+\subsection{\AmS{} Packages}
+\label{sec:ams-packages}
+
+The American Mathematical Society (\AmS) maintains a family of
+packages that are invaluable in typesetting mathematical discourse.
+The \texttt{amsmath} package provides an expanded set of math symbols,
+and should always be used when typesetting mathematics.  The
+\texttt{amsfonts} package provides additional mathematical fonts and
+should also be included in nearly all mathematical documents.  The
+packages \texttt{amssymb} and \texttt{amsextra} are less essential,
+but still good to include.
+
+The \texttt{amsthm} package provides the \AmS{} theorem environments.
+This allows for the insertion of \AmS-style theorem environments as
+described in Section~\ref{sec:theorems-proofs}.
+
+\subsection{Line Spacing}
+\label{sec:line-spacing}
+
+The \texttt{setspace} package adds the ability to doublespace
+documents in \LaTeX{}.  To doublespace a document, put
+\begin{verbatim}
+\usepackage{setspace}
+\end{verbatim}
+and
+\begin{verbatim}
+\doublespace
+\end{verbatim}
+in the preamble.  Other line spacing options are available, and are
+described in the documentation of the \texttt{setspace} package.
+
+\subsection{Hyperref}
+\label{sec:hyperref}
+
+The \texttt{hyperref} package provides commands for typesetting
+Internet URLs (using the \verb|\href| command).  This not only
+improves the formatting of the URLs, but also adds hyperlinks to the
+linked URL.  This is especially useful if you plan to distribute your
+document as a PDF.  Here's the syntax for the \verb|\href| command:
+\begin{verbatim}
+\href{http://blah.org/blah.html}{name of link}
+\end{verbatim}
+
+In addition, by passing the option \texttt{colorlinks=true} to
+\texttt{hyperref}, the rectangle box around links and internal
+references will be replaced by changing the color of the text itself.
+For internal references (especially in the table of contents and the
+use of \verb|\ref|), the color is set to red; for hyperlinks set by
+\verb|\href|, the default color is pink.
+
+\subsection{Babel}
+\label{sec:babel}
+
+The \texttt{babel} package extends \LaTeX's language support.  Refer
+to \texttt{babel}'s documentation for help with any specific language.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "reader"
+%%% End: 

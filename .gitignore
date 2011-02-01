@@ -1,0 +1,8 @@
+.DS_Store
+*.tex~
+*.aux
+*.out
+*.lot
+*.toc
+*.pdf
+

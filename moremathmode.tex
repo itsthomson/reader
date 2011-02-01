@@ -1,0 +1,413 @@
+\chapter{More Math Mode}
+\label{cha:more-math-mode}
+
+\section{Matrices}
+\label{sec:matrices}
+
+\LaTeX{} provides several different environments for making matrices
+and table-like structures.  Common to all of these environments is the
+use of the ampersand, \&, to delineate columns and the line break
+\verb_\\_ to separate rows.  Each row must be on its own line, though
+columns need not line up.  Although it is not necessary to maintain
+any manner of alignment, maintaining any manner of alignment of the
+columsn between rows can be helpful, especially in larger tables.
+
+Let us start by making a simple matrix using the \verb_array_
+environment.  Note that to use the \verb_array_ environment, one must
+be in math mode first.  Suppose we want to type the following matrix:
+\[
+\left(\begin{array}{rr}
+    1 & 0 \\
+    0 & 1
+  \end{array} \right)
+\]
+Then we want an array with a 1 and a 0 in the first row, and a 0 and a
+1 in the second row.  Thus, the code is
+\begin{verbatim}
+\begin{array}{rr}
+  1 & 0 \\
+  0 & 1
+\end{array}
+\end{verbatim}
+However, this will not enclose the numbers in parentheses.  As
+previously noted, the large left and right parentheses can be typeset
+using the commands \verb_\left_ and \verb_\right_.  Also, note that
+\verb_{rr}_ has been appended to \verb_\begin{array}_.  This indicates
+the vertical alignment of the columns.  The first \texttt{r}
+indicates the first column should be right-aligned, while the second
+\texttt{r} indicates the same for the second column.  Text in the
+columns can be aligned left, right, or center using \texttt{l},
+\texttt{r}, and \texttt{c}, respectively.  Thus
+\begin{verbatim}
+\left(
+\begin{array}{rr}
+  1 & 0 \\
+  0 & 1
+\end{array}
+\right)
+\end{verbatim}
+gives the completed matrix.
+
+The \AmS{} packages provide various environments for matrices beyond
+\verb_array_.  \verb_matrix_ is essentially the same as \verb_array_,
+as it creates a matrix without delimiters.  However, \verb_matrix_
+automatically centers the entries within the columns.  \verb_pmatrix_
+and \verb_vmatrix_ are two other matrix environments, and they come
+with delimiters.  Consider our previous example matrix written using
+\verb_pmatrix_ and \verb_vmatrix_, respectively:
+\[
+\begin{pmatrix}
+  1 & 0 \\
+  0 & 1
+\end{pmatrix}
+\begin{vmatrix}
+  1 & 0 \\
+  0 & 1
+\end{vmatrix}
+\]
+Additionally, \verb_matrix_ and similar environments can only handle
+matrices of up to ten columns.  Should you need a matrix with more
+columns, precede the start of the matrix environment with
+\begin{verbatim}
+\setcounter{MaxMatrixCols}{numcolumns}.
+\end{verbatim}
+
+\section{Commutative Diagrams}
+\label{sec:commutative-diagrams}
+
+While extensive graphics work in \LaTeX{} becomes something of a
+computer geek black art, commutative diagrams can be drawn easily
+using the \verb_\xymatrix{}_ command.  This command is part of the
+\verb_xy_ package by putting
+\begin{verbatim}
+\usepackage[all]{xy}
+\end{verbatim}
+in the preamble.  The \verb_\xymatrix{}_ command is used inside math
+mode, and behaves much like the \verb_array_ environment.  For
+example,
+\begin{verbatim}
+\[
+\xymatrix{G & H \\
+J & K}
+\]
+\end{verbatim}
+will give
+\[
+\xymatrix{G & H \\
+  J & K}
+\]
+These can all be connected with arrows using the \verb_\ar[argument]_
+command.  The argument of the command indicates the direction of the
+arrow: \texttt{l}, \texttt{r}, \texttt{u}, and \texttt{d} for left,
+right, up, and down, respectively.  These directions can be combined,
+repeatedly if necessary.  For example, \verb_\ar[drrr]_ points down
+three columns to the right.  The source code for a basic commutative
+diagram would look like this:
+\begin{verbatim}
+\[
+\xymatrix{G \ar[r] \ar[d] & H \ar[d] \\
+J \ar[r] & K}
+\]
+\end{verbatim}
+  This gives the diagram
+  \[
+  \xymatrix{G \ar[r] \ar[d] & H \ar[d] \\
+    J \ar[r] & K}
+  \]
+  Furthermore, these arrows can be labeled using subscripts and
+  superscripts.  For vertical arrows, subscripts go to the left, and
+  superscripts go to the right.
+\begin{verbatim}
+\[
+\xymatrix{G \ar[r]_f \ar[d]^\tau & H \ar[d]_\sigma \\
+J \ar[r]_g & K}
+\]
+\end{verbatim}
+\[
+\xymatrix{G \ar[r]_f \ar[d]^\tau & H \ar[d]_\sigma \\
+J \ar[r]_g & K}
+\]
+
+\section{Piecewise Functions}
+\label{sec:piecewise-functions}
+
+The typesetting of piecewise functions is accomplished 
+by using a built-in environment from the \verb_amsmath_
+environment.  Piecewise functions should be typeset almost exclusively
+in displayed math environments.  It is possible to place a piecewise
+function in an inline math environment, but the large size of a
+piecewise function will make a mess of your page.
+
+The \verb_amsmath_ package includes a \verb_cases_
+environment for typesetting piecewise functions and other related
+functions. It works just like the \verb_matrix_ environment (also
+provided by \verb_amsmath_), but only two columns are permitted.
+The left brace is also automatically printed before the array.
+Here is an example:
+\begin{verbatim}
+\[
+\delta(x) = \begin{cases}
+  0 & \mbox{if } x \neq 0 \\
+  \infty & \mbox{if } x = 0
+\end{cases}
+\]
+\end{verbatim}
+\[
+\delta(x) = \begin{cases}
+  0 & \mbox{if } x \neq 0 \\
+  \infty & \mbox{if } x = 0
+\end{cases}
+\]
+
+\section{Better Looking Math}
+\label{sec:better-looking-math}
+
+There are several commands that are very useful for improving the
+appearance of your mathematical content.
+
+\subsection{Eqnarray}
+\label{sec:eqnarray}
+
+\emph{Warning: This environment is deprecated and has
+  been supplanted by the \texttt{align} environment provided by
+  \texttt{amsmath}. It is only mentioned here for historical reasons.}
+
+The \texttt{eqnarray} environment is similar to the \texttt{array} or
+\texttt{tabular} environment, but is at most three columns wide, and
+no alignment needs to be declared for the columns.  Also,
+\texttt{eqnarray} is a math environment, meaning no dollar signs or
+other math mode environments are necessary.  The environment comes in
+two flavors: \texttt{eqnarray} will number the rows, while
+\texttt{eqnarray*} will not.  The environment is entered and exited
+like any other with \verb|\begin{eqnarray*}| and
+\verb|\end{eqnarray*}|.  Here is an example:
+\begin{verbatim}
+\begin{eqnarray}
+  \label{eq:2}
+  3x+2&=&5 \\
+  3x&=&3 \\
+  x&=&1
+\end{eqnarray}
+\end{verbatim}
+which results in:
+\begin{eqnarray}
+  \label{eq:2}
+  3x+2&=&5 \\
+  3x&=&3 \\
+  x&=&1
+\end{eqnarray}
+
+\subsection{Align}
+\label{sec:align}
+
+\emph{Note: This environment is the recommended way to typeset
+  aligned equations.}
+
+The \texttt{align} environment, like \texttt{eqnarray}, is similar to
+the \texttt{array} or \texttt{array} environment, but unlike the
+\texttt{eqnarray} environment, this environment is provided by the
+\texttt{amsmath} package and offers more features than the provided
+\texttt{eqnarray} environment.  Here is an example of the basic syntax
+of the \texttt{align} environment:
+\begin{verbatim}
+\begin{align}
+  \label{eq:3}
+  3x+2&=5 \\
+  3x&=3 \\
+  x&=1
+\end{align}
+\end{verbatim}
+which ends up as
+\begin{align}
+  \label{eq:3}
+  3x+2&=5 \\
+  3x&=3 \\
+  x&=1
+\end{align}
+
+\subsection{Displaystyle}
+\label{sec:displaystyle}
+
+The \verb|\displaystyle| command is the best friend of inline math.
+For the most part, \verb|\displaystyle| will make things bigger.  It
+will make inline fractions more readable, and for inline integrals,
+and general sums and products, it will place the indices above and
+below, rather than to the side of the operator.  The use of the
+\verb|\displaystyle| is best described with a few examples.  In the
+following example, the compiled code will immediately follow the source.
+\begin{verbatim}
+Some inline math: $\frac{\sqrt{2}}{\sqrt{3}}$.
+\end{verbatim}
+
+Some inline math: $\frac{\sqrt{2}}{\sqrt{3}}$.
+
+\begin{verbatim}
+Now with \texttt{displaystyle}:
+$\displaystyle\frac{\sqrt{2}}{\sqrt{3}}$.
+\end{verbatim}
+
+Now with \texttt{displaystyle}: $\displaystyle\frac{\sqrt{2}}{\sqrt{3}}$.
+
+\begin{verbatim}
+A bad looking sum: $\sum_{n=1}^\infty \frac{1}{n}$.
+\end{verbatim}
+
+A bad looking sum: $\sum_{n=1}^\infty \frac{1}{n}$.
+
+\begin{verbatim}
+\texttt{displaystyle} to the rescue!
+$\displaystyle \sum_{n=1}^\infty \frac{1}{n}$.
+\end{verbatim}
+
+\texttt{displaystyle} to the rescue! $\displaystyle \sum_{n=1}^\infty
+\frac{1}{n}$.
+
+Note that \verb|\displaystyle| need only be used once in each math
+environment.
+
+\section{Theorems and Proofs}
+\label{sec:theorems-proofs}
+
+\subsection{Theorems}
+\label{sec:theorems}
+
+Back in the dark ages of \TeX{}\footnote{One should not advertise that
+one actually used \TeX{}, especially if \LaTeX{} was written before
+one was born, as one will get strange looks.}, the command to begin a
+theorem was called \texttt{proclaim}.  However, \LaTeX{} isn't as
+overjoyed about its theorems, so \texttt{proclaim} is gone and
+replaced by the \texttt{theorem} environment.  If you open a math
+book, you'll notice that the theorems and theorem-like objects are all
+labeled differently.  Some are called theorems, others lemmas and
+still others propositions, among other things.  In the preamble of
+your document, you need to set up each of these different names
+separately using the \verb|\newtheorem| command.
+
+First, let's look at a theorem that just has a number, rather than a
+specific name:
+\begin{theorem}
+  Let $V$ be a finite-dimensional vector space, and define
+  $\psi:V\rightarrow V^{**}$ by $\psi(x)=\hat{x}$. Then $\psi$ is an
+  isomorphism.
+\end{theorem}
+
+The first thing we had to do to typeset this fine theorem was define
+an environment for it via \texttt{newtheorem}.  The command has two
+arguments, taking the form
+\verb|\newtheorem|\{\textit{name}\}\{\textit{Name}\}.  The first argument
+names the environment, and the second argument determines what things
+will be labeled.  (The two arguments do not have to be the same, but
+it would be a bit weird for the \texttt{chicken} environment to be
+producing theorems.)  In our example, the full command looked like
+\verb|\newtheorem{theorem}{Theorem}|.  The remainder of the code was
+\begin{verbatim}
+\begin{theorem}
+  Let $V$ be a finite-dimensional vector space, and
+  define $\psi:V\rightarrow V^{**}$ by $\psi(x)= %
+  \hat{x}$. Then $\psi$ is an isomorphism.
+\end{theorem}
+\end{verbatim}
+But what happens if your theorem has a name?
+\begin{theorem}[Fermat's Last Theorem]
+  If an integer $n$ is greater than 2, then the equation $a^n + b^n =
+  c^n$ has no solutions in non-zero integers $a$, $b$, and $c$.
+\end{theorem}
+
+The only difference between this and the previous example is the
+addition of the name.  We didn't have to add another
+\verb|\newtheorem| because we had already defined a theorem
+environment, which is also why this is numbered as Theorem 2.  So how
+did we add the name?  When we opened the \texttt{theorem} environment,
+we did it with
+\begin{verbatim}
+\begin{theorem}[Fermat's Last Theorem]
+\end{verbatim}
+This is all well and good, but what if you have a theorem that is so
+fantastically cool giving it a number would be cheapening the moment?
+\begin{morse}
+  Let $p_0$ be a non-degenerate critical point of a function $f$ of
+  two variables.  Then we can choose appropriate local coordinates
+  $(X,Y)$ in such a way that the function $f$ expressed with respect
+  to $(X,Y)$ takes one of the following three standard forms:
+  \begin{enumerate}
+  \item $f=X^2+Y^2+c$
+  \item $f=X^2-Y^2+c$
+  \item $f=-X^2-Y^2+c$
+  \end{enumerate}
+\end{morse}
+
+If you recall, the way we got rid of numbering on other things was to
+add a *\@.  The question is, do you add it to \verb|\newtheorem| or
+the start of the environment?  From experience, it seems as if adding
+it to \verb|\newtheorem| would ensure that every instance of that
+environment will be unnumbered, and adding it to the start of the
+environment would just eliminate the number from that one instance.
+As it happens, the answer is \verb|\newtheorem|, sort of.  If you just
+tack on the asterisk, you'll get an error as \verb|\newtheorem*| is
+not defined in \LaTeX{}.  However, it does exist with the inclusion of
+the \texttt{amsthm} package.  To typeset the Morse Lemma, we declared
+the environment with \verb|\newtheorem*{morse}{Morse Lemma}|.
+
+Each different proclamation environment has its own counter by
+default, so you could have a Theorem 1, a Definition 1, a Lemma 1, and
+who knows what else numbered 1.  But what if you wanted your theorems
+and lemmas numbered in succession so Theorem 1 was followed by Lemma 2
+rather than Lemma 1?  Covering the entire scope of counters would be
+unmanageable at this juncture, so we'll jsut cover the very basics and
+leave the rest for another time and place (quite possibly another
+book).  As it turns out, achieving this end leads us back to the
+\verb|\newtheorem| command.  So how do you declare the lemma
+environment?
+\begin{verbatim}
+\newtheorem{lemma}[theorem]{Lemma}
+\end{verbatim}
+There's one potential pitfall with this system.  What happens if
+\texttt{theorem} has not been defined yet?  Bad, bad things happen, so
+make sure you tie the counting to something that already exists.
+
+There is another counting option that ties numbering to some
+subdivision of the document, creating Theorem 1.1, etc.  This option
+is of the form
+\begin{verbatim}
+\newtheorem{theorem}{Theorem}[section]
+\end{verbatim}
+where \emph{section} can be any subdivision of the document such as
+\texttt{section}, \texttt{chapter}, or \texttt{subsection}.  Using
+this numbering scheme and tying the numbering to the subsection, we
+can create:
+\begin{thm}
+  Every bounded, monotonic sequence is convergent.
+\end{thm}
+
+The \texttt{amsthm} package provides the
+\verb|\newtheoremstyle|\{\textit{style}\} command which lets you
+define what the theorem is all about by picking from three predefined
+styles: \texttt{definition} (fat title, roman body), \texttt{plain}
+(fat title, italic body), or \texttt{remark} (italic title, roman
+body).\footnote{Oetiker, Tobias, Hubert Partl, Irene Hyna, and
+  Elisabeth Schlegl.  \emph{The Not So Short Introduction to
+    \LaTeXe{}}.  May 2006.  p.\ 60}
+
+\subsection{The Proof Environment}
+\label{sec:proof-environment}
+
+In addition to allowing for unnumbered theorems, the \texttt{amsthm}
+package provides the \texttt{proof} environment.  Using the
+environment is fairly straightforward; just follow the
+\verb|\begin{proof}| with what you want the proof labeled in square
+  brackets.  For example, if youw ant to include the proof of the
+  Morse Lemma, your code would look something like:
+\begin{verbatim}
+\begin{proof}[Proof of Morse Lemma]
+  the proof goes here
+\end{proof}
+\end{verbatim}
+The \texttt{proof} environment automatically places the QED symbol
+($\Box$) at the end, leaving an appropriate amount of space in
+front.  However, should it place the symbol in the wrong place, you
+can force the placement with \verb|\qedhere|.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "reader"
+%%% End: 
