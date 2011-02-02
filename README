@@ -13,5 +13,8 @@ This book was written hastily in August 2006 as the primary course reader for
 Math 98/198 at the University of California, Berkeley. We are currently
 in the process of preparing a 2nd edition of this text.
 
+auto/ contains some macros for emacs users (whyyyyyy).
+test/ contains a memoir-class compilation of the 18 Jan build.
+
 The website for the LaTeX DeCal can still be found at:
 http://latex.berkeley.edu
